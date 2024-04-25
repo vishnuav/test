@@ -1,4 +1,4 @@
-package com.jackson.xml;
+package com.jackson.xml.model.broadcast;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fee implements XMLParsingEligible {
-  private int id;
-  private double value;
+public class CRDBroadcastExec implements XMLParsingEligible {
+  private Order order;
 }
