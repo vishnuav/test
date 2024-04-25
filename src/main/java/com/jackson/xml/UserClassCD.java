@@ -1,0 +1,15 @@
+package com.jackson.xml;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserClassCD implements XMLParsingEligible {
+  private int id;
+  private String value;
+}

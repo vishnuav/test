@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CRDEvents>
+  <order>
+    <id>5072922850</id>
+    <status>ACCT</status>
+    <manager>RDONATE</manager>
+    <trader>RDONATE</trader>
+    <execBroker>JPMS5</execBroker>
+    <security>
+      <cusip>160853MS3</cusip>
+      <sedol>BFXSKM7</sedol>
+      <secId>669986</secId>
+      <secTypCd>MUNI</secTypCd>
+      <invClassCd>DEBT</invClassCd>
+      <transType>SELLL</transType>
+      <targetQty>7100000</targetQty>
+      <execQty>7100000</execQty>
+    </security>
+    <allocations>
+      <allocation>
+        <id>1257055829</id>
+        <fundManager>FRIVERA</fundManager>
+        <targetQty>6900000</targetQty>
+        <execQty>6900000</execQty>
+        <acctCd>4330</acctCd>
+      </allocation>
+    </allocations>
+    <placeDate>2024-04-23 10:22:17.985</placeDate>
+    <settleDate>2024-04-23 00:00:00</settleDate>
+    <tradeDate>2024-04-23 00:00:00</tradeDate>
+  </order>
+</CRDEvents>
