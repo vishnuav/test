@@ -1,5 +1,6 @@
 package com.frk.crd;
 
+import com.frk.crd.configuration.CRDConfiguration;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.broker.BrokerService;
@@ -14,8 +15,8 @@ import java.time.Duration;
 
 @Slf4j
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {JMS2FileConfiguration.class, Producer.class, CamelRoute.class})
-class CamelRouteTest extends JMS2FileConfigurationTest {
+@ContextConfiguration(classes = {CRDConfiguration.class, Producer.class, CamelRoute.class})
+class CamelRouteTest extends CRDConfigurationTest {
   @SneakyThrows
   @BeforeAll
   static void beforeAll() {

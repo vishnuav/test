@@ -17,7 +17,7 @@ import javax.jms.ConnectionFactory;
 @Slf4j
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-class JMS2FileConfigurationTest {
+class CRDConfigurationTest {
   @Value("application.in.queue")
   protected String inQueue;
   @Value("application.out.queue")
