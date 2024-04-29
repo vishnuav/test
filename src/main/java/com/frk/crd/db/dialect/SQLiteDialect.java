@@ -5,6 +5,7 @@ import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.identity.IdentityColumnSupport;
 
 public class SQLiteDialect extends Dialect {
+
   public SQLiteDialect() {
     registerColumnType(Types.BIT, "integer");
     registerColumnType(Types.TINYINT, "tinyint");
@@ -96,12 +97,12 @@ public class SQLiteDialect extends Dialect {
 
   public String getDropForeignKeyString() {
     throw new UnsupportedOperationException(
-      "No drop foreign key syntax supported by SQLiteDialect");
+        "No drop foreign key syntax supported by SQLiteDialect");
   }
 
   public String getAddForeignKeyConstraintString(String constraintName,
-                                                 String[] foreignKey, String referencedTable, String[] primaryKey,
-                                                 boolean referencesPrimaryKey) {
+      String[] foreignKey, String referencedTable, String[] primaryKey,
+      boolean referencesPrimaryKey) {
     throw new UnsupportedOperationException("No add foreign key syntax supported by SQLiteDialect");
   }
 

@@ -1,32 +1,23 @@
+local:
+  host: http://localhost
 crd:
-  db:
-    dir: ${user.home}/crd/${environment}/db
+  app:
+    in:
+      queue: frk.in.queue
+    out:
+      queue: frk.out.queue
+    rest:
+      connector:
+        host: http://localhost
+        port: 8010
+    db:
+      dir: ${user.home}/crd-app/${environment}/db
+      sync:
+        save:
+          cron: 0/30 * 1-23 * * *
+        history:
+          cron: 0 10 20 * * MON-FRI
 spring:
-  jpa:
-    show-sql: false
-    database-platform: com.frk.crd.db.dialect.SQLiteDialect
-    hibernate:
-      ddl-auto: none
-      dialect: com.frk.crd.db.dialect.SQLiteDialect
-    open-in-view: false
-    generate-ddl: false
-    properties:
-      hibernate:
-        dialect: com.frk.crd.db.dialect.SQLiteDialect
-        jdbc:
-          batch_size: 1000
-        order_inserts: true
-        order_updates: true
-        generate_statistics: true
-    datasource:
-      url: jdbc:sqlite:${crd.db.dir}/crd.db
-      driver-class-name: org.sqlite.JDBC
-      username: sa
-      password: sa
-      hikari:
-        data-source-properties:
-          cache_size: 4096
-        maximum-pool-size: 64
   activemq:
     broker-url: tcp://localhost:61616
     in-memory: true
@@ -38,16 +29,46 @@ spring:
   web:
     locale: en_US
   application:
-    name: CRD-JMS-Adaptor
-  codec:
-    max-in-memory-size: 40MB
-
-application:
-  name: CRD-JMS-Adaptor
-  in:
-    queue: frk.in.queue
-  out:
-    queue: frk.out.queue
+    name: CRD-PMD-POC
+  main:
+    banner-mode: off
+  jpa:
+    show-sql: false
+    database-platform: com.frk.crd.db.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+  datasource:
+    url: jdbc:sqlite:${crd.app.db.dir}/crd.db
+    driver-class-name: org.sqlite.JDBC
+    username: sa
+    password: sa
+    hikari:
+      data-source-properties:
+        cache_size: 4096
+      maximum-pool-size: 64
+#Logging Properties
+logging:
+  file:
+    path: ${user.home}/crd-app/${environment}/logs
+  level:
+    jdbc:
+      sqlonly: info
+      resultsettable: info
+      sqltiming: info
+      audit: info
+      resultset: info
+      connection: info
+server:
+  port: 7010
 ---
 #Local Environment
 environment: local
@@ -58,3 +79,43 @@ spring:
     name: local
 server:
   port: 6010
+crd:
+  app:
+    rest:
+      connector:
+        host: http://localhost
+        port: 6010
+---
+#Development Environment
+environment: dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+    name: dev
+server:
+  port: 7010
+crd:
+  app:
+    rest:
+      connector:
+        host: http://localhost
+        port: 7010
+---
+#UAT Environment
+environment: uat
+spring:
+  config:
+    activate:
+      on-profile: uat
+    name: uat
+server:
+  port: 9010
+---
+#Production Environment
+environment: prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+    name: prod
