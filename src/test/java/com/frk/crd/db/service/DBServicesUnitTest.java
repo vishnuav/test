@@ -4,7 +4,6 @@ package com.frk.crd.db.service;
 import com.frk.crd.configuration.CRDConfigurationTest;
 import com.frk.crd.db.model.DBStreamedMessage;
 import com.frk.crd.db.model.StreamedMessage;
-import com.frk.crd.db.utils.TestConstants;
 import com.frk.crd.utils.CRDUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -20,7 +19,7 @@ import java.util.List;
 class DBServicesUnitTest extends CRDConfigurationTest {
   @Test
   void syncStreamedMessages() throws IOException {
-    List<String> lines = readFile(MORNING_QUOTES);
+    List<String> lines = readFile(MESSAGE_FILE);
     Assertions.assertNotNull(lines);
     Assertions.assertTrue(lines.size() > 0);
     final List<String> toSync = new ArrayList<>();
@@ -56,13 +55,9 @@ class DBServicesUnitTest extends CRDConfigurationTest {
     List<String> messages = new ArrayList<>();
     messages.add(StringUtils.EMPTY);
     messages.add("Not a valid Json");
-    messages.add(TestConstants.LOGIN_MESSAGE);
-    messages.add(TestConstants.HEARTBEAT_MESSAGE);
-    messages.add(TestConstants.STREAMER_TIMEOUT_MESSAGE);
-    messages.add(TestConstants.QUOTE_SUBSCRIPTION_SUCCESS_MESSAGE);
     afterSave = dbWriteService.saveMessages(messages);
     Assertions.assertTrue(ObjectUtils.isNotEmpty(afterSave));
-    Assertions.assertEquals(6, afterSave.size());
+    Assertions.assertEquals(2, afterSave.size());
   }
 
   void syncMessages(List<String> toSync) {

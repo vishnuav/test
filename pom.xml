@@ -15,8 +15,8 @@
     <!-- Encoding -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- Java -->
-    <maven.compiler.source>19</maven.compiler.source>
-    <maven.compiler.target>19</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <!-- db -->
     <sqlite.version>3.34.0</sqlite.version>
     <!-- camel -->
@@ -30,8 +30,7 @@
     <reactor-test.version>3.2.3.RELEASE</reactor-test.version>
   </properties>
 
-<groupId>com.frk.crd</groupId>
-  <artifactId>crd-camel-jms-file-poc</artifactId>
+  <artifactId>crd-pmd-poc</artifactId>
   <dependencyManagement>
     <dependencies>
       <!-- Third party dependencies -->

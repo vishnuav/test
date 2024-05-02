@@ -47,7 +47,7 @@ public class CRDConfigurationTest {
   @Value("${spring.activemq.broker-url}")
   private String brokerUrl;
 
-  public static final String MORNING_QUOTES = "/Users/vishnuayyalasomayajula/large-test-data/morning-quotes-2023-03-05.csv";
+  public static final String MESSAGE_FILE = "src/test/resources/Expected.xml";
 
   @Autowired
   protected CRDConfiguration CRDConfiguration;
