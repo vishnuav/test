@@ -21,6 +21,7 @@ import java.util.List;
 
 @Slf4j
 class CRDEventsTest {
+
     @Test
     void serialize() throws IOException {
         File file = new File("src/test/resources/CRD_Order_Broadcast.xml");

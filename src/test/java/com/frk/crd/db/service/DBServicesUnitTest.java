@@ -4,19 +4,20 @@ package com.frk.crd.db.service;
 import com.frk.crd.configuration.CRDConfigurationTest;
 import com.frk.crd.db.model.DBStreamedMessage;
 import com.frk.crd.db.model.StreamedMessage;
+import com.frk.crd.db.utils.TestConstants;
 import com.frk.crd.utils.CRDUtils;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 @Slf4j
 class DBServicesUnitTest extends CRDConfigurationTest {
+
   @Test
   void syncStreamedMessages() throws IOException {
     List<String> lines = readFile(MESSAGE_FILE);
@@ -55,9 +56,10 @@ class DBServicesUnitTest extends CRDConfigurationTest {
     List<String> messages = new ArrayList<>();
     messages.add(StringUtils.EMPTY);
     messages.add("Not a valid Json");
+    messages.add(TestConstants.EXPECTED_XML);
     afterSave = dbWriteService.saveMessages(messages);
     Assertions.assertTrue(ObjectUtils.isNotEmpty(afterSave));
-    Assertions.assertEquals(2, afterSave.size());
+    Assertions.assertEquals(3, afterSave.size());
   }
 
   void syncMessages(List<String> toSync) {

@@ -28,6 +28,7 @@ public class CamelRoute extends RouteBuilder {
     getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     from("activemq:" + inQueue).to("activemq:" + outQueue);
     from("activemq:" + outQueue).to("log:com.frk.crd?level=INFO&groupSize=10");
+
 //        onException()
 //        from("activemq:" + inQueue)
 //                .unmarshal().jacksonxml()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>spring-boot-dependencies</artifactId>
     <groupId>org.springframework.boot</groupId>
@@ -30,6 +30,7 @@
     <reactor-test.version>3.2.3.RELEASE</reactor-test.version>
   </properties>
 
+  <groupId>com.frk.crd</groupId>
   <artifactId>crd-pmd-poc</artifactId>
   <dependencyManagement>
     <dependencies>
