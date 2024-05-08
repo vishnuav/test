@@ -2,6 +2,8 @@ local:
   host: http://localhost
 crd:
   app:
+    file:
+      destination: ${user.home}/crd-app/messages/
     in:
       queue: frk.in.queue
     out:

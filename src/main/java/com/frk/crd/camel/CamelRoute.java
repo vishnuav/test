@@ -11,27 +11,29 @@ import javax.jms.ConnectionFactory;
 @Slf4j
 @Component
 public class CamelRoute extends RouteBuilder {
+  public static final String ACTIVEMQ_COMPONENT = "activemq:";
   private final String inQueue;
   private final String outQueue;
+  private final String fileMessageDestination;
   private final ConnectionFactory connectionFactory;
 
   public CamelRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
+                    @Value("${crd.app.file.destination}") String fileMessageDestination,
                     ConnectionFactory connectionFactory) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
+    this.fileMessageDestination = fileMessageDestination;
     this.connectionFactory = connectionFactory;
   }
 
   @Override
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
-    getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-    from("activemq:" + inQueue).to("activemq:" + outQueue);
-    from("activemq:" + outQueue).to("log:com.frk.crd?level=INFO&groupSize=10");
-
-//        onException()
-//        from("activemq:" + inQueue)
-//                .unmarshal().jacksonxml()
-//                .to("log:com.frk.crd?level=INFO&groupSize=10");
+    getContext()
+//      .addComponent("messageFile", "")
+      .addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory))
+      ;
+    from(ACTIVEMQ_COMPONENT + inQueue).to(ACTIVEMQ_COMPONENT + outQueue).to("file://" + fileMessageDestination);
+    from(ACTIVEMQ_COMPONENT + outQueue).to("log:com.frk.crd?level=INFO&groupSize=10");
   }
 }
