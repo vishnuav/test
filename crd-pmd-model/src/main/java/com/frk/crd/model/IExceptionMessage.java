@@ -1,10 +1,12 @@
 package com.frk.crd.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import java.time.Instant;
 import java.time.ZoneId;
 
+@JsonDeserialize(as = ExceptionMessage.class)
 public interface IExceptionMessage extends JsonAware {
-
   String getSourceName();
 
   String getDestinationType();

@@ -1,14 +1,15 @@
 package com.frk.crd.db.model;
 
 import com.frk.crd.model.IExceptionMessage;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Getter
@@ -16,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "exception_message")
-public class ExceptionMessage implements IExceptionMessage {
+public class DBExceptionMessage implements IExceptionMessage {
   @Id
   private long id;
   @Column(name = "source_name")
@@ -32,8 +33,8 @@ public class ExceptionMessage implements IExceptionMessage {
   @Column(name = "exception_date_time")
   private long exceptionDateTime;
 
-  public ExceptionMessage(IExceptionMessage message) {
-    this(message.getId(), message.getSourceName(), message.getDestinationType(), message.getDestinationURL(),
-        message.getPayload(), message.getStatus(), message.getExceptionDateTime());
+  public DBExceptionMessage(IExceptionMessage message) {
+    this(message.getId(), message.getSourceName(), message.getDestinationType(), message.getDestinationURL(), message.getPayload(),
+      message.getStatus(), message.getExceptionDateTime());
   }
 }
