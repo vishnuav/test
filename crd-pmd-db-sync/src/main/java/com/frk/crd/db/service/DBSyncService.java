@@ -1,13 +1,15 @@
 package com.frk.crd.db.service;
 
 import com.frk.crd.model.IExceptionMessage;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
 public interface DBSyncService {
-
+  @Transactional
   void syncStreamedMessages(Collection<String> messages);
 
+  @Transactional
   void syncExceptionMessages(Collection<IExceptionMessage> messages);
 
   long getLastDBSaveTime();

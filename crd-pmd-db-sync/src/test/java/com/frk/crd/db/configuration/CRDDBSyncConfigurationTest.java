@@ -2,7 +2,9 @@ package com.frk.crd.db.configuration;
 
 import com.frk.crd.db.dao.ExceptionMessageRepository;
 import com.frk.crd.db.dao.StreamedMessageRepository;
+import com.frk.crd.db.service.DBReadService;
 import com.frk.crd.db.service.DBSyncService;
+import com.frk.crd.db.service.impl.DBReadServiceImpl;
 import com.frk.crd.db.service.impl.DBSyncServiceImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,8 +18,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "local")
-@Sql(value = {"/db-script.sql"})
-@SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBSyncServiceImpl.class})
+//@Sql(value = {"/db-script.sql"})
+@SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBReadServiceImpl.class, DBSyncServiceImpl.class})
 public class CRDDBSyncConfigurationTest {
   @Value("${server.port}")
   protected int serverPort;
@@ -31,6 +33,8 @@ public class CRDDBSyncConfigurationTest {
 
   @Autowired
   protected DBSyncService dbSyncService;
+  @Autowired
+  protected DBReadService dbReadService;
 //  @Autowired
 //  protected WebClient webClient;
 
@@ -47,25 +51,12 @@ public class CRDDBSyncConfigurationTest {
 
   @Test
   void autowire() {
-    // Configuration
-//    Assertions.assertNotNull(CRDConfiguration.getMarketClientHost());
-//    Assertions.assertNotEquals(0, CRDConfiguration.getMarketClientPort());
-
     // DB Repositories
     Assertions.assertNotNull(dbStreamedMessageRepository);
+    Assertions.assertNotNull(dbExceptionMessageRepository);
 
     // Service
+    Assertions.assertNotNull(dbReadService);
     Assertions.assertNotNull(dbSyncService);
-
-    // WebTestClient
-//    Assertions.assertNotNull(dbWebTestClient());
-//    Assertions.assertNotNull(marketWebTestClient());
   }
-
-//  public static List<String> readFile(String fileName) throws IOException {
-//    File file = new File(fileName);
-//    Assertions.assertNotNull(file);
-//    Assertions.assertTrue(file.exists() && file.isFile() && file.canRead());
-//    return FileUtils.readLines(file, StandardCharsets.UTF_8.name());
-//  }
 }

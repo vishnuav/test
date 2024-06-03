@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,7 @@ class DBRepositoryUnitTest extends CRDDBSyncConfigurationTest {
   }
 
   @Test
-  void saveExceptionMessageWithInterfaceConstructor() {
+  void saveExceptionMessageWithInterfaceConstructor() throws UnsupportedEncodingException {
     long exceptionDateTime = System.currentTimeMillis();
     long aMinuteAgo = exceptionDateTime - Duration.ofMillis(1).toMillis();
     IExceptionMessage message = new DBExceptionMessage(aMinuteAgo, "CRD-PMD-CAMEL", "REST",

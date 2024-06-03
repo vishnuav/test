@@ -20,7 +20,7 @@ public interface IExceptionMessage extends JsonAware {
   default long getExceptionDate() {
     ZoneId zoneId = ZoneId.of("America/New_York");
     return Instant.ofEpochMilli(getExceptionDateTime()).atZone(zoneId).toLocalDateTime().withHour(0)
-        .withSecond(0).withMinute(0).withNano(0).atZone(zoneId).toInstant().toEpochMilli();
+      .withSecond(0).withMinute(0).withNano(0).atZone(zoneId).toInstant().toEpochMilli();
   }
 
   long getExceptionDateTime();
