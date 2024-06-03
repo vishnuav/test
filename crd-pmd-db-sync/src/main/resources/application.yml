@@ -1,0 +1,107 @@
+local:
+  host: http://localhost
+crd:
+  app:
+    full-path: /apps/crd.dev2/adapters/${spring.application.name}
+    db:
+      dir: ${user.home}/crd-app/${environment}/db
+      sync:
+        save:
+          cron: 0/30 * 1-23 * * *
+        history:
+          cron: 0 10 20 * * MON-FRI
+spring:
+  web:
+    locale: en_US
+  application:
+    name: crd-db-sync-${environment}
+  main:
+    banner-mode: off
+  jpa:
+    show-sql: false
+    database-platform: com.frk.crd.db.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+  datasource:
+    url: jdbc:sqlite:${crd.app.db.dir}/crd.db
+    driver-class-name: org.sqlite.JDBC
+    username: sa
+    password: sa
+    hikari:
+      data-source-properties:
+        cache_size: 4096
+      maximum-pool-size: 64
+#Logging Properties
+logging:
+  file:
+    path: ${crd.app.full-path}/logs
+  level:
+    jdbc:
+      sqlonly: info
+      resultsettable: info
+      sqltiming: info
+      audit: info
+      resultset: info
+      connection: info
+server:
+  port: 7010
+---
+#Local Environment
+environment: local
+logging:
+  file:
+    path: ${user.home}/crd-app/${environment}/logs
+ibm:
+  mq:
+    initial:
+      context:
+        url: file:${user.home}/jndi-dir
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local
+server:
+  port: 6010
+crd:
+  app:
+    full-path: ${user.home}/adapters/${spring.application.name}
+    db:
+      dir: ${crd.app.full-path}/db
+---
+#Development Environment
+environment: dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+    name: dev
+server:
+  port: 7010
+---
+#UAT Environment
+environment: uat
+spring:
+  config:
+    activate:
+      on-profile: uat
+    name: uat
+server:
+  port: 9010
+---
+#Production Environment
+environment: prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+    name: prod
