@@ -14,7 +14,7 @@
     <module>crd-pmd-utilities</module>
     <module>crd-pmd-model</module>
     <module>crd-pmd-db-sync</module>
-    <module>crd-jms-processor</module>
+    <module>crd-pmd-jms-processor</module>
     <module>crd-exception-handler</module>
     <module>crd-pmd-camel-processor</module>
   </modules>
@@ -68,7 +68,7 @@
       </dependency>
       <dependency>
         <groupId>com.frk.crd</groupId>
-        <artifactId>crd-jms-processor</artifactId>
+        <artifactId>crd-pmd-jms-processor</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>

@@ -1,0 +1,71 @@
+server:
+  port: 6020
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
+crd:
+  app:
+    in:
+      queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+    out:
+      queue: frk.out.queue
+spring:
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    inMemory: true
+    closeTimeout: true
+    user: admin
+    password: admin
+    packages:
+      trusted: com.broker.activemq.entities,java.lang
+---
+---
+#Local Environment
+environment: local
+logging:
+  file:
+    path: ${user.home}/crd-exception-handler-app/${environment}/logs
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local
+server:
+  port: 6020
+crd:
+  app:
+    full-path: ${user.home}/adapters/${spring.application.name}
+    db:
+      dir: ${crd.app.full-path}/db
+---
+#Development Environment
+environment: dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+    name: dev
+server:
+  port: 7020
+---
+#UAT Environment
+environment: uat
+spring:
+  config:
+    activate:
+      on-profile: uat
+    name: uat
+server:
+  port: 9020
+---
+#Production Environment
+environment: prod
+spring:
+  config:
+    activate:
+      on-profile: prod
+    name: prod

@@ -9,8 +9,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <groupId>com.algo.trading</groupId>
-  <artifactId>crd-jms-processor</artifactId>
+  <groupId>com.frk.crd</groupId>
+  <artifactId>crd-pmd-jms-processor</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.frk.crd</groupId>
