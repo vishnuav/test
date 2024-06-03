@@ -1,0 +1,22 @@
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
+crd:
+  app:
+    in:
+      queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+    out:
+      queue: frk.out.queue
+spring:
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    inMemory: true
+    closeTimeout: true
+    user: admin
+    password: admin
+    packages:
+      truested: com.broker.activemq.entities,java.lang

@@ -18,7 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "local")
-//@Sql(value = {"/db-script.sql"})
+@Sql(value = {"/db-script.sql"})
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBReadServiceImpl.class, DBSyncServiceImpl.class})
 public class CRDDBSyncConfigurationTest {
   @Value("${server.port}")
