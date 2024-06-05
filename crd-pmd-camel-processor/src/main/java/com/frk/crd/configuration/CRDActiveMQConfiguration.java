@@ -17,10 +17,10 @@ import org.springframework.jms.core.JmsTemplate;
 @EnableConfigurationProperties
 @Conditional(value = {JMSDefalutLocalConfigurationCondition.class})
 public class CRDActiveMQConfiguration {
-  @Value(value = "${crd.app.rest.connector.host}")
-  @Getter
-  protected String marketClientHost;
-  @Value(value = "${crd.app.rest.connector.port}")
+//  @Value(value = "${crd.app.rest.connector.host}")
+//  @Getter
+//  protected String marketClientHost;
+//  @Value(value = "${crd.app.rest.connector.port}")
   @Getter
   protected int marketClientPort;
   @Value("${spring.activemq.broker-url}")

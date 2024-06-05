@@ -25,10 +25,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 @EnableTransactionManagement
 @EnableConfigurationProperties
 public class CRDConfiguration {
-  @Value(value = "${crd.app.rest.connector.host}")
-  @Getter
-  protected String marketClientHost;
-  @Value(value = "${crd.app.rest.connector.port}")
+//  @Value(value = "${crd.app.rest.connector.host}")
+//  @Getter
+//  protected String marketClientHost;
+//  @Value(value = "${crd.app.rest.connector.port}")
   @Getter
   protected int marketClientPort;
   @Value("${spring.activemq.broker-url}")
@@ -51,17 +51,17 @@ public class CRDConfiguration {
         .build();
   }
 
-  @Bean
-  @Qualifier(DiscoveryService.DB_SERVICE_CLIENT)
-  public WebClient marketWebClient() {
-    String marketClientBaseURL = String.format("%s:%s", marketClientHost, marketClientPort);
-    return WebClient
-        .builder()
-        .codecs(ClientCodecConfigurer::defaultCodecs)
-        .baseUrl(marketClientBaseURL)
-        .exchangeStrategies(getExchangeStrategies())
-        .build();
-  }
+//  @Bean
+//  @Qualifier(DiscoveryService.DB_SERVICE_CLIENT)
+//  public WebClient marketWebClient() {
+//    String marketClientBaseURL = String.format("%s:%s", marketClientHost, marketClientPort);
+//    return WebClient
+//        .builder()
+//        .codecs(ClientCodecConfigurer::defaultCodecs)
+//        .baseUrl(marketClientBaseURL)
+//        .exchangeStrategies(getExchangeStrategies())
+//        .build();
+//  }
 
   @Bean
   public MessageConverter messageConverter(JmsTemplate jmstemplate) {

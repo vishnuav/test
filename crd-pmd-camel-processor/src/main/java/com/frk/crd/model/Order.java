@@ -53,4 +53,9 @@ public class Order implements CrdIDEligible, OperationEligible {
       this.allocations.add(allocation);
     }
   }
+
+  @Override
+  public long getCrdId() {
+    return 0;
+  }
 }

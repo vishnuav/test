@@ -1,5 +1,6 @@
+environment: dev
 server:
-  port: 6020
+  port: 9030
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -14,6 +15,21 @@ crd:
     out:
       queue: frk.out.queue
 spring:
+  application:
+    name: crd-camel-processor-app
+---
+#Local Environment
+environment: local
+server:
+  port: 6030
+logging:
+  file:
+    path: ${crd.app.full-path}/${environment}/logs
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local
   activemq:
     brokerUrl: tcp://localhost:61616
     inMemory: true
@@ -22,24 +38,9 @@ spring:
     password: admin
     packages:
       trusted: com.broker.activemq.entities,java.lang
----
-#Local Environment
-environment: local
-logging:
-  file:
-    path: ${user.home}/crd-exception-handler-app/${environment}/logs
-spring:
-  config:
-    activate:
-      on-profile: local, default
-    name: local
-server:
-  port: 6020
 crd:
   app:
     full-path: ${user.home}/adapters/${spring.application.name}
-    db:
-      dir: ${crd.app.full-path}/db
 ---
 #Development Environment
 environment: dev
@@ -49,7 +50,7 @@ spring:
       on-profile: dev
     name: dev
 server:
-  port: 7020
+  port: 7030
 ---
 #UAT Environment
 environment: uat
@@ -59,7 +60,7 @@ spring:
       on-profile: uat
     name: uat
 server:
-  port: 9020
+  port: 8030
 ---
 #Production Environment
 environment: prod

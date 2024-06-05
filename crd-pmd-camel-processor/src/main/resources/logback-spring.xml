@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <springProperty name="LOG-FILE-DIR" scope="context" source="logging.file.path"/>
+  <springProperty name="LOG-FILE-PREFIX" scope="context" source="spring.application.name"/>
+  <property scope="context" name="LOG_PATTERN" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %c{1.} [%t] %m%n"/>
+  <property scope="context" name="MAX_FILE_SIZE" value="50MB"/>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+    </layout>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+  </appender>
+
+  <!--  <logger level="error" name="jdk"/>-->
+  <logger level="error" name="sun"/>
+  <logger level="error" name="java"/>
+  <logger level="error" name="jdk"/>
+  <logger level="error" name="javax"/>
+  <logger level="info" name="org"/>
+  <logger level="info" name="io"/>
+  <!--  <logger level="error" name="com"/>-->
+  <!--  <logger level="error" name="reactor"/>-->
+
+  <logger level="info" name="org.springframework.web.servlet.DispatcherServlet"/>
+
+  <logger level="info" name="org.eclipse"/>
+  <logger level="info" name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener"/>
+
+  <logger level="debug" name="org.springframework.web"/>
+  <logger level="trace" name="com.frk"/>
+
+  <root level="TRACE">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>

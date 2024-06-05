@@ -1,26 +1,25 @@
 package com.frk.crd.rest;
 
+import com.frk.crd.service.MessagePublishService;
+import com.frk.crd.utilities.DiscoveryService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jms.core.JmsTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
 public class MessageProducerController {
-  private final String queueName;
-  private final JmsTemplate jmsTemplate;
+  private final MessagePublishService publishService;
 
-  @Autowired
-  public MessageProducerController(JmsTemplate jmsTemplate, @Value("${crd.app.in.queue}") String queueName) {
-    this.jmsTemplate = jmsTemplate;
-    this.queueName = queueName;
+  public MessageProducerController(MessagePublishService publishService) {
+    this.publishService = publishService;
   }
 
-  @GetMapping("send")
-  public void sendMessage() {
-    jmsTemplate.convertAndSend(queueName, "Test");
+  @PostMapping(path = DiscoveryService.PUBLISH_MESSAGE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public void publishMessage(@RequestParam("queueName") String queueName, @RequestBody String payload) {
+    publishService.sendToQueue(queueName, payload);
   }
 }

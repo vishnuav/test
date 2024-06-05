@@ -28,4 +28,9 @@ public class Allocation implements CrdIDEligible, OperationEligible {
     this.targetQuantity = targetQuantity;
     this.executingQuantity = executingQuantity;
   }
+
+  @Override
+  public long getCrdId() {
+    return 0;
+  }
 }
