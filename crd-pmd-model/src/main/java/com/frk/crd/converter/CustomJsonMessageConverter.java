@@ -1,4 +1,4 @@
-package com.frk.crd.converter.converter;
+package com.frk.crd.converter;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,7 +1,7 @@
 package com.frk.crd.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.frk.crd.converter.converter.CustomJsonMessageConverter;
+import com.frk.crd.converter.CustomJsonMessageConverter;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public interface ToJsonEligible extends CRDEligible {
