@@ -1,5 +1,6 @@
 package com.frk.crd.camel;
 
+import com.frk.crd.model.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -17,12 +18,14 @@ public class CamelRoute extends RouteBuilder {
   private final String inQueue;
   private final String outQueue;
   private final ConnectionFactory connectionFactory;
+  private final HeaderInterceptor headerInterceptor;
 
   public CamelRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                    ConnectionFactory connectionFactory) {
+                    ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
     this.connectionFactory = connectionFactory;
+    this.headerInterceptor = headerInterceptor;
   }
 
   @Override
@@ -30,6 +33,7 @@ public class CamelRoute extends RouteBuilder {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     from("activemq:" + inQueue)
+      .bean(headerInterceptor, "process")
       .to("activemq:" + outQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .log("Found message in queue " + inQueue);
