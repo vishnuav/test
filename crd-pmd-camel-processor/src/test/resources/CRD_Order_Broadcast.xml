@@ -1,6 +1,14 @@
 <event>
-	<inputEvent>PDP-ORDER-STATUS</inputEvent>
-	<eventDetails>
-		<Id>504</Id>
-	</eventDetails>
+  <inputEvent>PDP-ORDER-STATUS</inputEvent>
+  <eventDetails>
+    <Id>5041248783</Id>
+    <RefId>WARR-Order-06-05-2024</RefId>
+    <Status>PREOK</Status>
+    <TargetQty>40</TargetQty>
+    <ExecQty>null</ExecQty>
+    <Manager>RDONATE</Manager>
+    <Trader>KLEUNG2</Trader>
+    <ExecBroker>null</ExecBroker>
+    <FillBroker>null</FillBroker>
+  </eventDetails>
 </event>

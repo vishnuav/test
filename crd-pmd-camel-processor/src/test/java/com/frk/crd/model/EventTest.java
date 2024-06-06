@@ -3,8 +3,6 @@ package com.frk.crd.model;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.frk.crd.model.Event;
-import com.frk.crd.model.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
@@ -30,6 +28,18 @@ class EventTest {
     try {
       Event event = xmlMapper.readValue(xml, Event.class);
       Assertions.assertNotNull(event);
+      EventDetails eventDetails = event.getEventDetails();
+      Assertions.assertNotNull(eventDetails);
+      Assertions.assertEquals(5041248783L, eventDetails.getId());
+      Assertions.assertEquals("WARR-Order-06-05-2024", eventDetails.getRefId());
+      Assertions.assertEquals("PREOK", eventDetails.getStatus());
+      Assertions.assertEquals(40, eventDetails.getTargetQty());
+      Assertions.assertEquals(0, eventDetails.getExecQty());
+      Assertions.assertEquals("RDONATE", eventDetails.getManager());
+      Assertions.assertEquals("KLEUNG2", eventDetails.getTrader());
+      Assertions.assertNull(eventDetails.getExecBroker());
+      Assertions.assertNull(eventDetails.getFillBroker());
+
       String toXML = xmlMapper.writeValueAsString(event);
       Assertions.assertNotNull(toXML);
 //            Assertions.assertEquals(expected, toXML);
