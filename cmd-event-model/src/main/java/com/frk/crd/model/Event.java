@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CRDEvents implements XMLParsingEligible {
+public class Event implements XMLParsingEligible {
   private Order order;
 }

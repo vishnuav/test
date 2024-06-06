@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CRDBroadcastExec>
+<event>
     <order crdId="5072922850" version="17,7" op="update">
         <cusip>160853MS3</cusip>
         <sedol>BFXSKM7</sedol>
@@ -104,4 +104,4 @@
             <execBaseAmt>200000</execBaseAmt>
         </allocation>
     </order>
-</CRDBroadcastExec>
+</event>
