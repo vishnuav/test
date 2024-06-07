@@ -1,28 +1,42 @@
 package com.frk.crd.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 @Getter
 public class EventDetails {
+  @JsonAlias("Id")
   private long id;
-  private String refId, status, manager, trader, execBroker, fillBroker;
-  private int targetQty, execQty;
+  @JsonAlias("RefId")
+  private String refId;
+  @JsonAlias("Status")
+  private String status;
+  @JsonAlias("TargetQty")
+  private int targetQty;
+  @JsonAlias("ExecQty")
+  private int execQty;
 
-  public EventDetails(@JsonProperty("Id") long id, @JsonProperty("RefId") String refId, @JsonProperty("Status") String status,
-                      @JsonProperty("Manager") String manager, @JsonProperty("Trader") String trader,
-                      @JsonProperty("ExecBroker") String execBroker, @JsonProperty("FillBroker") String fillBroker,
-                      @JsonProperty("TargetQty") int targetQty, @JsonProperty("ExecQty") int execQty) {
-    this.id = id;
-    this.refId = refId;
-    this.status = status;
+  private String manager, trader, execBroker, fillBroker;
+
+  @JsonAlias("Manager")
+  public void setManager(String manager) {
     this.manager = validateStringValue(manager);
+  }
+
+  @JsonAlias("Trader")
+  public void setTrader(String trader) {
     this.trader = validateStringValue(trader);
+  }
+
+  @JsonAlias("ExecBroker")
+  public void setExecBroker(String execBroker) {
     this.execBroker = validateStringValue(execBroker);
+  }
+
+  @JsonAlias("FillBroker")
+  public void setFillBroker(String fillBroker) {
     this.fillBroker = validateStringValue(fillBroker);
-    this.targetQty = targetQty;
-    this.execQty = execQty;
   }
 
   final String validateStringValue(String manager) {
