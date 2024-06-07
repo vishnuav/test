@@ -18,7 +18,7 @@ public class MessageProducerController {
     this.publishService = publishService;
   }
 
-  @PostMapping(path = DiscoveryService.PUBLISH_MESSAGE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(path = DiscoveryService.PUBLISH_MESSAGE, produces = MediaType.TEXT_PLAIN_VALUE)
   public void publishMessage(@RequestParam("queueName") String queueName, @RequestBody String payload) {
     publishService.sendToQueue(queueName, payload);
   }

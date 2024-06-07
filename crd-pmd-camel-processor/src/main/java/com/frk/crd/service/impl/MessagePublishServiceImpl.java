@@ -1,7 +1,5 @@
 package com.frk.crd.service.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.frk.crd.service.MessagePublishService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.JmsException;
@@ -22,14 +20,13 @@ public class MessagePublishServiceImpl implements MessagePublishService {
   @Override
   public void sendToQueue(String queueName, String payload) {
     try {
-      String json = new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(payload);
       jmsTemplate.send(queueName, messageCreator -> {
         TextMessage message = messageCreator.createTextMessage();
-        message.setText(json);
+        message.setText(payload);
         log.debug("Sending message {}", message.getText());
         return message;
       });
-    } catch (JmsException | JsonProcessingException e) {
+    } catch (JmsException e) {
       log.error("Error in sending message to queue name {}, payload {}", queueName, payload, e);
     }
   }

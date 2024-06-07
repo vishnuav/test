@@ -63,14 +63,14 @@ public class CRDConfiguration {
 //        .build();
 //  }
 
-  @Bean
-  public MessageConverter messageConverter(JmsTemplate jmstemplate) {
-    MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
-    converter.setTargetType(MessageType.TEXT);
-    converter.setObjectMapper(objectMapper());
-    jmstemplate.setMessageConverter(converter);
-    return converter;
-  }
+//  @Bean
+//  public MessageConverter messageConverter(JmsTemplate jmstemplate) {
+//    MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+//    converter.setTargetType(MessageType.TEXT);
+//    converter.setObjectMapper(objectMapper());
+//    jmstemplate.setMessageConverter(converter);
+//    return converter;
+//  }
 
   @Bean
   public ObjectMapper objectMapper() {

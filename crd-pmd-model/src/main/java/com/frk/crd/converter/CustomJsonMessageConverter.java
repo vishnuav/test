@@ -1,40 +1,63 @@
 package com.frk.crd.converter;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.frk.crd.utilities.CRDConstants;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
 public class CustomJsonMessageConverter {
   private final static ObjectMapper jsonMapper;
+  private final static XmlMapper xmlMapper;
   private final StringBuilder messageBuilder = new StringBuilder();
+
 
   static {
     jsonMapper = new ObjectMapper();
     JsonMapper build = JsonMapper.builder().enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-        .build();
+      .build();
     jsonMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
     SimpleModule simpleModule = new SimpleModule();
     SimpleAbstractTypeResolver resolver = new SimpleAbstractTypeResolver();
     simpleModule.setAbstractTypes(resolver);
     jsonMapper.registerModule(simpleModule);
+
+    xmlMapper = new XmlMapper();
+    xmlMapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
+    xmlMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    xmlMapper.disable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
+    xmlMapper.disable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+  }
+
+  public static <T> Optional<T> fromXML(String xml, Class<T> clazz) {
+    try {
+      return StringUtils.isEmpty(xml)
+        ? Optional.empty()
+        : Optional.of(xmlMapper.readValue(clearUnParsableChars(xml), clazz));
+    } catch (Throwable e) {
+      log.warn("Unable to generate class {} for {}", clazz == null ? null : clazz.getName(), xml, e);
+      return Optional.empty();
+    }
   }
 
   public static <T> Optional<T> fromJson(String json, Class<T> clazz) {
     try {
       return StringUtils.isEmpty(json)
-          ? Optional.empty()
-          : Optional.of(jsonMapper.readValue(clearUnParsableChars(json), clazz));
+        ? Optional.empty()
+        : Optional.of(jsonMapper.readValue(clearUnParsableChars(json), clazz));
     } catch (Throwable e) {
       log.warn("Unable to generate class {} for {}", clazz == null ? null : clazz.getName(), json, e);
       return Optional.empty();
@@ -57,7 +80,7 @@ public class CustomJsonMessageConverter {
     }
     try {
       return new ObjectMapper().readValue(jsonString, new ObjectMapper().getTypeFactory().
-          constructCollectionType(List.class, target));
+        constructCollectionType(List.class, target));
     } catch (Throwable e) {
       log.error("Unable to convert to list of {} from json {} ", target.getName(), jsonString, e);
       return List.of();

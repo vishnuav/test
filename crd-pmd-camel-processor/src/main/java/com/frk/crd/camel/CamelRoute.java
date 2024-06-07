@@ -33,7 +33,7 @@ public class CamelRoute extends RouteBuilder {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     from("activemq:" + inQueue)
-      .bean(headerInterceptor, "process")
+      .bean(headerInterceptor, "intercept")
       .to("activemq:" + outQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .log("Found message in queue " + inQueue);

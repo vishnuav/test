@@ -30,6 +30,7 @@
   <logger level="info" name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener"/>
 
   <logger level="debug" name="org.springframework.web"/>
+  <logger level="trace" name="org.springframework.jms.core"/>
   <logger level="trace" name="com.frk"/>
 
   <root level="TRACE">

@@ -1,6 +1,5 @@
 package com.frk.crd.configuration;
 
-import javax.jms.ConnectionFactory;
 import lombok.Getter;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
@@ -11,13 +10,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.support.destination.DynamicDestinationResolver;
+
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Session;
 
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
 @Conditional(value = {JMSDefalutLocalConfigurationCondition.class})
 public class CRDActiveMQConfiguration {
-//  @Value(value = "${crd.app.rest.connector.host}")
+  //  @Value(value = "${crd.app.rest.connector.host}")
 //  @Getter
 //  protected String marketClientHost;
 //  @Value(value = "${crd.app.rest.connector.port}")
@@ -43,11 +48,12 @@ public class CRDActiveMQConfiguration {
   }
 
   @Bean
-  public JmsTemplate jmsTemplate() {
+  public JmsTemplate jmsTemplate(DynamicDestinationResolver destinationResolver) {
     JmsTemplate template = new JmsTemplate();
     template.setConnectionFactory(connectionFactory());
-    template.setPubSubDomain(true);
+    template.setPubSubDomain(false);
     template.setDeliveryPersistent(true);
+    template.setDestinationResolver(destinationResolver);
     return template;
   }
 
@@ -58,5 +64,15 @@ public class CRDActiveMQConfiguration {
     embeddedBroker.setPersistent(false);
     embeddedBroker.start(true);
     return embeddedBroker;
+  }
+
+  @Bean
+  public DynamicDestinationResolver destinationResolver() {
+    return new DynamicDestinationResolver() {
+      @Override
+      public Destination resolveDestinationName(Session session, String destinationName, boolean pubSubDomain) throws JMSException {
+        return super.resolveDestinationName(session, destinationName, false);
+      }
+    };
   }
 }
