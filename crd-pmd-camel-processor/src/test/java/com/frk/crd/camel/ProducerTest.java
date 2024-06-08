@@ -1,7 +1,6 @@
 package com.frk.crd.camel;
 
-import com.frk.crd.configuration.CRDActiveMQConfiguration;
-import com.frk.crd.configuration.CRDConfiguration;
+import com.frk.crd.configuration.CRDCamelConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.jms.Message;
 import javax.jms.TextMessage;
 
+@ActiveProfiles(value = "local")
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {CRDConfiguration.class, CRDActiveMQConfiguration.class})
+@SpringBootTest(classes = {CRDCamelConfiguration.class, CRDCamelConfiguration.class})
 class ProducerTest {
   @Value(value = "${crd.app.in.queue}")
   private String inQueue;

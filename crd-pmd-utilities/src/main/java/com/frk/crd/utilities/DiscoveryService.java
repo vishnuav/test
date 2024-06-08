@@ -7,4 +7,5 @@ public class DiscoveryService {
   public static final String FETCH_EXCEPTION_MESSAGES_FOR_DATE = "/fetchAllExceptionMessagesForDate";
   public static final String PUBLISH_MESSAGE = "/publishMessage";
   public static final String DB_SERVICE_CLIENT = "db-service-client";
+  public static final String REPLAY_EXCEPTION_MESSAGE = "replayExceptionMessage";
 }

@@ -20,6 +20,10 @@
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-model</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.frk.crd</groupId>
+      <artifactId>crd-pmd-jms-processor</artifactId>
+    </dependency>
 
     <!-- Spring -->
     <dependency>
