@@ -1,6 +1,6 @@
 package com.frk.crd.camel;
 
-import com.frk.crd.model.HeaderInterceptor;
+import com.frk.crd.processor.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;

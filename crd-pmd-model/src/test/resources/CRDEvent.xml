@@ -1,6 +1,6 @@
-<event>
+<CRDEvent>
   <inputEvent>PDP-ORDER-STATUS</inputEvent>
-  <eventDetails>
+  <order>
     <Id>1</Id>
-  </eventDetails>
-</event>
+  </order>
+</CRDEvent>

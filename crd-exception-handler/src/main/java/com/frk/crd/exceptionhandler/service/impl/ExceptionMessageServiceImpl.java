@@ -1,7 +1,7 @@
 package com.frk.crd.exceptionhandler.service.impl;
 
 import com.frk.crd.exceptionhandler.service.ExceptionMessageService;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;

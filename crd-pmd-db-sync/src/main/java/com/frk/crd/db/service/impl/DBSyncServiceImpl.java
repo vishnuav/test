@@ -5,7 +5,7 @@ import com.frk.crd.db.dao.StreamedMessageRepository;
 import com.frk.crd.db.model.DBExceptionMessage;
 import com.frk.crd.db.model.DBStreamedMessage;
 import com.frk.crd.db.service.DBSyncService;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Component;

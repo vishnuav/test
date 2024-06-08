@@ -3,8 +3,8 @@ package com.frk.crd.db.service.impl;
 import com.frk.crd.db.dao.ExceptionMessageRepository;
 import com.frk.crd.db.model.DBExceptionMessage;
 import com.frk.crd.db.service.DBReadService;
-import com.frk.crd.model.ExceptionMessage;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.ExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

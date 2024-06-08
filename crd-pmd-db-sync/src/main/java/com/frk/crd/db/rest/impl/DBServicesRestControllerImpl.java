@@ -3,7 +3,7 @@ package com.frk.crd.db.rest.impl;
 import com.frk.crd.db.rest.DBServicesRestController;
 import com.frk.crd.db.service.DBReadService;
 import com.frk.crd.db.service.DBSyncService;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;

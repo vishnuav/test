@@ -1,6 +1,6 @@
 package com.frk.crd.db.model;
 
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package com.frk.crd.model;
+package com.frk.crd.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

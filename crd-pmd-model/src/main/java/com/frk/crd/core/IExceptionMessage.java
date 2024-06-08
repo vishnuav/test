@@ -1,4 +1,4 @@
-package com.frk.crd.model;
+package com.frk.crd.core;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 

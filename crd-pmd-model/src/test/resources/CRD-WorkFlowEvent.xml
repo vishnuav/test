@@ -1,4 +1,4 @@
-<event>
+<CRDEvent>
   <inputEvent>PDP-ORDER-STATUS</inputEvent>
   <eventDetails>
     <Id>5041248783</Id>
@@ -11,4 +11,4 @@
     <ExecBroker>null</ExecBroker>
     <FillBroker>null</FillBroker>
   </eventDetails>
-</event>
+</CRDEvent>

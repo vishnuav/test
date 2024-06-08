@@ -3,7 +3,7 @@ package com.frk.crd.db.dao;
 import com.frk.crd.db.configuration.CRDDBSyncConfigurationTest;
 import com.frk.crd.db.model.DBExceptionMessage;
 import com.frk.crd.db.model.DBStreamedMessage;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import com.frk.crd.utilities.CRDUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;

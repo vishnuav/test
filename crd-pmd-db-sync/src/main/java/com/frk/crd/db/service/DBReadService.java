@@ -1,6 +1,6 @@
 package com.frk.crd.db.service;
 
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 
 import java.util.List;
 

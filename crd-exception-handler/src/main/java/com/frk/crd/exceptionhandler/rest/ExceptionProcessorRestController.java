@@ -1,6 +1,6 @@
 package com.frk.crd.exceptionhandler.rest;
 
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import com.frk.crd.utilities.DiscoveryService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

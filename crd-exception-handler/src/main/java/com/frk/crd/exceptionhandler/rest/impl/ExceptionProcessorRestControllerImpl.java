@@ -2,7 +2,7 @@ package com.frk.crd.exceptionhandler.rest.impl;
 
 import com.frk.crd.exceptionhandler.rest.ExceptionProcessorRestController;
 import com.frk.crd.exceptionhandler.service.ExceptionMessageService;
-import com.frk.crd.model.IExceptionMessage;
+import com.frk.crd.core.IExceptionMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;

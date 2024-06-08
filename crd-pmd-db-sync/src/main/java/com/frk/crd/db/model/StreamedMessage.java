@@ -1,6 +1,6 @@
 package com.frk.crd.db.model;
 
-import com.frk.crd.model.JsonAware;
+import com.frk.crd.core.JsonAware;
 import com.frk.crd.utilities.CRDUtils;
 
 public interface StreamedMessage extends JsonAware, TimeComparable {

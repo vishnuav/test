@@ -1,9 +1,6 @@
 package com.frk.crd.converter;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -26,20 +23,26 @@ public class CustomJsonMessageConverter {
 
 
   static {
-    jsonMapper = new ObjectMapper();
-    JsonMapper build = JsonMapper.builder().enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-      .build();
-    jsonMapper.enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS);
     SimpleModule simpleModule = new SimpleModule();
     SimpleAbstractTypeResolver resolver = new SimpleAbstractTypeResolver();
     simpleModule.setAbstractTypes(resolver);
-    jsonMapper.registerModule(simpleModule);
+    jsonMapper = new ObjectMapper();
+    JsonMapper build = JsonMapper.builder()
+      .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+      .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+      .propertyNamingStrategy(PropertyNamingStrategies.UPPER_CAMEL_CASE)
+      .addModule(simpleModule)
+      .build();
 
-    xmlMapper = new XmlMapper();
-    xmlMapper.enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS);
-    xmlMapper.enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-    xmlMapper.disable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT);
-    xmlMapper.disable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+    xmlMapper = XmlMapper.builder()
+      .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
+      .enable(SerializationFeature.ORDER_MAP_ENTRIES_BY_KEYS)
+      .enable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+      .disable(DeserializationFeature.ACCEPT_EMPTY_ARRAY_AS_NULL_OBJECT)
+      .disable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+      .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+      .propertyNamingStrategy(PropertyNamingStrategies.UPPER_CAMEL_CASE)
+      .build();
   }
 
   public static <T> Optional<T> fromXML(String xml, Class<T> clazz) {
@@ -62,6 +65,16 @@ public class CustomJsonMessageConverter {
       log.warn("Unable to generate class {} for {}", clazz == null ? null : clazz.getName(), json, e);
       return Optional.empty();
     }
+  }
+
+  public static <T extends Serializable> String toXML(T object) {
+    String xml = StringUtils.EMPTY;
+    try {
+      xml = xmlMapper.writeValueAsString(object);
+    } catch (Throwable e) {
+      log.trace("Unable to generate XML for {}", object, e);
+    }
+    return xml == null ? StringUtils.EMPTY : xml;
   }
 
   public static <T extends Serializable> String toJson(T object) {
