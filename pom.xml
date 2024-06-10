@@ -16,7 +16,9 @@
     <module>crd-pmd-db-sync</module>
     <module>crd-pmd-jms-processor</module>
     <module>crd-exception-handler</module>
-    <module>crd-pmd-camel-processor</module>
+    <module>crd-pmd-workflow-rule-processor</module>
+    <module>crd-pmd-event-processor</module>
+    <module>crd-pmd-enrichment-service</module>
   </modules>
   <modelVersion>4.0.0</modelVersion>
   <version>0.0.1-SNAPSHOT</version>

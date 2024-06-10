@@ -1,20 +1,18 @@
-package com.frk.crd;
+package com.frk.crd.events;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Slf4j
-@EnableScheduling
 @SpringBootApplication(scanBasePackages = "com.frk.crd")
-public class CRDCamelApplication {
+public class CRDPMDEventProcessorApplication {
   public static void main(String[] args) {
     log.info("Starting CRD Camel Application");
     try {
-      SpringApplication.run(CRDCamelApplication.class);
+      SpringApplication.run(CRDPMDEventProcessorApplication.class);
     } catch (Exception exception) {
-      log.warn("Exception in running CRD Camel Application", exception);
+      log.warn("Exception when starting CRD to PMD Event Processor Application", exception);
     }
   }
 }

@@ -1,4 +1,4 @@
-package com.frk.crd.camel;
+package com.frk.crd.wfrule;
 
 import com.frk.crd.processor.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +11,7 @@ import javax.jms.ConnectionFactory;
 
 @Slf4j
 @Component
-public class CamelRoute extends RouteBuilder {
+public class WFRuleRoute extends RouteBuilder {
   public static final String IBMMQ_COMPONENT = "ibmmq";
   public static final String ACTIVEMQ_COMPONENT = "activemq";
   public static final String COMPONENT_SEPARATOR = ":";
@@ -20,8 +20,8 @@ public class CamelRoute extends RouteBuilder {
   private final ConnectionFactory connectionFactory;
   private final HeaderInterceptor headerInterceptor;
 
-  public CamelRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                    ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor) {
+  public WFRuleRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
+                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
     this.connectionFactory = connectionFactory;

@@ -1,4 +1,4 @@
-package com.frk.crd.camel;
+package com.frk.crd.wfrule;
 
 import com.frk.crd.configuration.CRDCamelConfiguration;
 import org.junit.jupiter.api.Assertions;
