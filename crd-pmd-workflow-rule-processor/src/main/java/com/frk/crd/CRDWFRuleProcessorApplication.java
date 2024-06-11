@@ -6,13 +6,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
 @SpringBootApplication(scanBasePackages = "com.frk.crd")
-public class CRDCamelApplication {
+public class CRDWFRuleProcessorApplication {
   public static void main(String[] args) {
-    log.info("Starting CRD Camel Application");
+    log.info("Starting CRD PMD WF Rule Processor Application");
     try {
-      SpringApplication.run(CRDCamelApplication.class);
+      SpringApplication.run(CRDWFRuleProcessorApplication.class);
     } catch (Exception exception) {
-      log.warn("Exception when starting CRD Camel Application", exception);
+      log.warn("Exception when starting CRD PMD WF Rule Processor Application", exception);
     }
   }
 }

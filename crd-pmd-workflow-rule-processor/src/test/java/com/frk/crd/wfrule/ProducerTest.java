@@ -1,6 +1,6 @@
 package com.frk.crd.wfrule;
 
-import com.frk.crd.configuration.CRDCamelConfiguration;
+import com.frk.crd.configuration.WFRuleProcessorConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import javax.jms.TextMessage;
 
 @ActiveProfiles(value = "local")
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {CRDCamelConfiguration.class, CRDCamelConfiguration.class})
+@SpringBootTest(classes = {WFRuleProcessorConfiguration.class, WFRuleProcessorConfiguration.class})
 class ProducerTest {
   @Value(value = "${crd.app.in.queue}")
   private String inQueue;

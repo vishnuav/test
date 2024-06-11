@@ -41,7 +41,9 @@ public class CRDActiveMQConfiguration {
     BrokerService embeddedBroker = new BrokerService();
     embeddedBroker.addConnector(brokerURL);
     embeddedBroker.setPersistent(false);
-    embeddedBroker.start(true);
+    if (!embeddedBroker.isStarted()) {
+      embeddedBroker.start(true);
+    }
     return embeddedBroker;
   }
 }

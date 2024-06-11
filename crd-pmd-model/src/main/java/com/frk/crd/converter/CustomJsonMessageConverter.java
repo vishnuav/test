@@ -49,7 +49,7 @@ public class CustomJsonMessageConverter {
     try {
       return StringUtils.isEmpty(xml)
         ? Optional.empty()
-        : Optional.of(xmlMapper.readValue(clearUnParsableChars(xml), clazz));
+        : Optional.of(xmlMapper.readValue(xml, clazz));
     } catch (Throwable e) {
       log.warn("Unable to generate class {} for {}", clazz == null ? null : clazz.getName(), xml, e);
       return Optional.empty();

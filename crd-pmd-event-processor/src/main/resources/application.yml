@@ -1,6 +1,6 @@
 environment: dev
 server:
-  port: 9040
+  port: 9030
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -11,17 +11,17 @@ ibm:
 crd:
   app:
     in:
-      queue: QLD.CRI.TIS.ORD.REQUEST.Q12
-    out:
       queue: frk.out.crd.queue
+    out:
+      queue: frk.out.pmd.queue
 spring:
   application:
-    name: crd-pmd-wf-rule-processor-app
+    name: crd-pmd-event-processor-app
 ---
 #Local Environment
 environment: local
 server:
-  port: 6040
+  port: 6030
 logging:
   file:
     path: ${crd.app.full-path}/${environment}/logs
@@ -50,7 +50,7 @@ spring:
       on-profile: dev
     name: dev
 server:
-  port: 7040
+  port: 7030
 ---
 #UAT Environment
 environment: uat
@@ -60,7 +60,7 @@ spring:
       on-profile: uat
     name: uat
 server:
-  port: 8040
+  port: 8030
 ---
 #Production Environment
 environment: prod

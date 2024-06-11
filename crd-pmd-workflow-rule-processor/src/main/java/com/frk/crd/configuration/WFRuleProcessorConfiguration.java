@@ -13,5 +13,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableConfigurationProperties
 @Import({CRDActiveMQConfiguration.class, CRDIMBMQConfiguration.class})
-public class CRDCamelConfiguration {
+public class WFRuleProcessorConfiguration {
 }

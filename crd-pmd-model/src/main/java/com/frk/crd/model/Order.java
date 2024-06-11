@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.frk.crd.core.XMLParsingEligible;
 import com.frk.crd.deserializer.StringNullBlankAwareDeserializer;
 import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 @Getter
 public class Order implements XMLParsingEligible {
   private long id;
+  @Setter
   private long originalId;
   private String refId;
   private String status;
@@ -40,6 +43,12 @@ public class Order implements XMLParsingEligible {
   public void setAllocations(Allocation allocation) {
     if (allocation != null) {
       this.allocations.add(allocation);
+    }
+  }
+
+  public void addAllocations(List<Allocation> allocations) {
+    if (ObjectUtils.isNotEmpty(allocations)) {
+      this.allocations.addAll(allocations);
     }
   }
 }

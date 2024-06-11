@@ -24,6 +24,10 @@
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-jms-processor</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.frk.crd</groupId>
+      <artifactId>crd-pmd-camel-processing</artifactId>
+    </dependency>
 
     <!-- Spring -->
     <dependency>
@@ -42,18 +46,6 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
-
-    <!-- Camel -->
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-spring-boot-starter</artifactId>
-      <version>${camel-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-jms</artifactId>
-      <version>${camel-version}</version>
     </dependency>
 
     <!-- Testing -->

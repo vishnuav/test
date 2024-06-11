@@ -14,7 +14,7 @@ import lombok.Setter;
 @JsonRootName("CRDEvents")
 public class CRDEvent implements XMLParsingEligible {
   @JsonAlias("inputEvent")
-  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String inputEvent;
   @JsonAlias("eventDetails")
   private Order order;

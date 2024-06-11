@@ -16,9 +16,10 @@ class CRDEventTest {
   void serializeFromWFRule() throws IOException {
     File file = new File("src/test/resources/CRD-WorkFlowEvent.xml");
     String xml = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
-    CRDEvent CRDEvent = CustomJsonMessageConverter.fromXML(xml, CRDEvent.class).orElse(null);
-    Assertions.assertNotNull(CRDEvent);
-    Order order = CRDEvent.getOrder();
+    CRDEvent event = CustomJsonMessageConverter.fromXML(xml, CRDEvent.class).orElse(null);
+    Assertions.assertNotNull(event);
+    Assertions.assertEquals("PDP-ORDER-STATUS", event.getInputEvent());
+    Order order = event.getOrder();
     Assertions.assertNotNull(order);
     Assertions.assertEquals(5041248783L, order.getId());
     Assertions.assertEquals("WARR-Order-06-05-2024", order.getRefId());
@@ -29,7 +30,7 @@ class CRDEventTest {
     Assertions.assertEquals("KLEUNG2", order.getTrader());
     Assertions.assertNull(order.getExecBroker());
     Assertions.assertNull(order.getFillBroker());
-    String actual = CustomJsonMessageConverter.toXML(CRDEvent);
+    String actual = CustomJsonMessageConverter.toXML(event);
     Assertions.assertNotNull(actual);
     Assertions.assertEquals(expected, actual);
   }

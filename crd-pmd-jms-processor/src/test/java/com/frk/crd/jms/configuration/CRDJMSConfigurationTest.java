@@ -14,8 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.jms.ConnectionFactory;
 
-@ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "local")
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {CRDJMSConfiguration.class, CRDActiveMQConfiguration.class, MessagePublishServiceImpl.class})
 public class CRDJMSConfigurationTest {
   @Autowired

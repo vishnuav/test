@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(scanBasePackages = "com.frk.crd")
 public class CRDPMDEventProcessorApplication {
   public static void main(String[] args) {
-    log.info("Starting CRD Camel Application");
+    log.info("Starting CRD to PMD Event Processor Application Application");
     try {
       SpringApplication.run(CRDPMDEventProcessorApplication.class);
     } catch (Exception exception) {
