@@ -1,6 +1,5 @@
 package com.frk.crd.events.processor;
 
-import com.frk.crd.events.enrichment.EnrichmentInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -18,14 +17,12 @@ public class EventProcessorRoute extends RouteBuilder {
   private final String inQueue;
   private final String outQueue;
   private final ConnectionFactory connectionFactory;
-  private final EnrichmentInterceptor enrichmentInterceptor;
 
   public EventProcessorRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                             ConnectionFactory connectionFactory, EnrichmentInterceptor enrichmentInterceptor) {
+                             ConnectionFactory connectionFactory) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
     this.connectionFactory = connectionFactory;
-    this.enrichmentInterceptor = enrichmentInterceptor;
   }
 
   @Override
@@ -33,8 +30,6 @@ public class EventProcessorRoute extends RouteBuilder {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     from("activemq:" + inQueue)
-      .bean(enrichmentInterceptor, "withAllocations")
-      .bean(enrichmentInterceptor, "withOriginalOrderId")
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .log("Found message in queue " + inQueue);
   }

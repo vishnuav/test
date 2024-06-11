@@ -1,5 +1,6 @@
 package com.frk.crd.wfrule;
 
+import com.frk.crd.interceptor.EnrichmentInterceptor;
 import com.frk.crd.interceptor.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
@@ -18,13 +19,15 @@ public class WFRuleRoute extends RouteBuilder {
   private final String inQueue;
   private final String outQueue;
   private final ConnectionFactory connectionFactory;
+  private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
 
   public WFRuleRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor) {
+                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
     this.connectionFactory = connectionFactory;
+    this.enrichmentInterceptor = enrichmentInterceptor;
     this.headerInterceptor = headerInterceptor;
   }
 
@@ -33,9 +36,10 @@ public class WFRuleRoute extends RouteBuilder {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
     from("activemq:" + inQueue)
-      .bean(headerInterceptor, "intercept")
+      .log("Found message in queue " + inQueue)
+      .bean(enrichmentInterceptor, "enrich")
       .to("activemq:" + outQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
-      .log("Found message in queue " + inQueue);
+      .to("file://target/");
   }
 }

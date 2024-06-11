@@ -28,6 +28,10 @@
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-camel-processing</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.frk.crd</groupId>
+      <artifactId>crd-pmd-enrichment-service</artifactId>
+    </dependency>
 
     <!-- Spring -->
     <dependency>

@@ -1,8 +1,9 @@
-package com.frk.crd.events.enrichment;
+package com.frk.crd.interceptor;
 
 import com.frk.crd.converter.CustomJsonMessageConverter;
 import com.frk.crd.model.Allocation;
 import com.frk.crd.model.CRDEvent;
+import com.frk.crd.model.Order;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.apache.commons.lang3.StringUtils;
@@ -14,24 +15,17 @@ import java.util.List;
 @Slf4j
 @Component
 public class EnrichmentInterceptor {
-  public void withAllocations(Exchange exchange) {
+  public void enrich(Exchange exchange) {
     Object payload = exchange.getIn().getBody();
     CRDEvent event = CustomJsonMessageConverter.fromXML(payload.toString(), CRDEvent.class).orElse(null);
     if (event != null && StringUtils.isNotBlank(event.getInputEvent())) {
+      exchange.getOut().setHeader("CRDEvent", event.getInputEvent());
+      Order order = event.getOrder();
       String refId = event.getOrder().getRefId();
-      List<Allocation> allocations = getAllocations(refId);
-      event.getOrder().addAllocations(allocations);
-    } else {
-      log.error("Unable to map payload to event or input event is not present {}", payload);
-    }
-  }
-
-  public void withOriginalOrderId(Exchange exchange) {
-    Object payload = exchange.getIn().getBody();
-    CRDEvent event = CustomJsonMessageConverter.fromXML(payload.toString(), CRDEvent.class).orElse(null);
-    if (event != null && StringUtils.isNotBlank(event.getInputEvent())) {
-      String refId = event.getOrder().getRefId();
-      event.getOrder().setOriginalId(getOriginalOrderId(refId));
+      order.setOriginalId(getOriginalOrderId(refId));
+      order.addAllocations(getAllocations(refId));
+      exchange.getOut().setBody(event.toXML());
+      System.out.println();
     } else {
       log.error("Unable to map payload to event or input event is not present {}", payload);
     }
