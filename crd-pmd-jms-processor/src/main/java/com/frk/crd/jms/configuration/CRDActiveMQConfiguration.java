@@ -1,5 +1,7 @@
 package com.frk.crd.jms.configuration;
 
+import com.frk.crd.jms.model.ActiveMQComponentBean;
+import com.frk.crd.jms.model.JMSComponentBean;
 import lombok.Getter;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
@@ -17,15 +19,21 @@ import javax.jms.ConnectionFactory;
 @EnableConfigurationProperties
 @Conditional(value = {JMSDefaultLocalConfigurationCondition.class})
 public class CRDActiveMQConfiguration {
+
+  @Getter
   @Value(value = "${spring.activemq.brokerUrl}")
-  @Getter
   private String brokerURL;
+  @Getter
   @Value(value = "${spring.activemq.user}")
-  @Getter
   private String brokerUser;
-  @Value(value = "${spring.activemq.password}")
   @Getter
+  @Value(value = "${spring.activemq.password}")
   private String brokerPassword;
+
+  @Bean
+  public JMSComponentBean jmsComponentBean() {
+    return new ActiveMQComponentBean();
+  }
 
   @Bean
   public ConnectionFactory connectionFactory() {

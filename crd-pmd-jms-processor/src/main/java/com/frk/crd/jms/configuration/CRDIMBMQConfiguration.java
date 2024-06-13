@@ -1,5 +1,7 @@
 package com.frk.crd.jms.configuration;
 
+import com.frk.crd.jms.model.JMSComponentBean;
+import com.frk.crd.jms.model.IBMMQComponentBean;
 import com.ibm.mq.jms.MQQueueConnectionFactory;
 import com.ibm.msg.client.wmq.WMQConstants;
 import lombok.Getter;
@@ -34,6 +36,11 @@ public class CRDIMBMQConfiguration {
   @Getter
   @Value(value = "${ibm.mq.port}")
   private int mqPort;
+
+  @Bean
+  public JMSComponentBean jmsComponent() {
+    return new IBMMQComponentBean();
+  }
 
   @Bean
   public ConnectionFactory connectionFactory() throws JMSException {

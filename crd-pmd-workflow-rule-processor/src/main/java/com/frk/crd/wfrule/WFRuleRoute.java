@@ -2,6 +2,7 @@ package com.frk.crd.wfrule;
 
 import com.frk.crd.interceptor.EnrichmentInterceptor;
 import com.frk.crd.interceptor.HeaderInterceptor;
+import com.frk.crd.jms.model.JMSComponentBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -18,14 +19,17 @@ public class WFRuleRoute extends RouteBuilder {
   public static final String COMPONENT_SEPARATOR = ":";
   private final String inQueue;
   private final String outQueue;
+  private final JMSComponentBean jmsComponentBean;
   private final ConnectionFactory connectionFactory;
   private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
 
   public WFRuleRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
+                     JMSComponentBean jmsComponentBean, ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor,
+                     EnrichmentInterceptor enrichmentInterceptor) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
+    this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
     this.enrichmentInterceptor = enrichmentInterceptor;
     this.headerInterceptor = headerInterceptor;
@@ -34,8 +38,8 @@ public class WFRuleRoute extends RouteBuilder {
   @Override
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
-    getContext().addComponent("activemq", JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-    from("activemq:" + inQueue)
+    getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+    from(jmsComponentBean.routeInfo() + inQueue)
       .log("Found message in queue " + inQueue)
       .bean(enrichmentInterceptor, "enrich")
       .to("activemq:" + outQueue)
