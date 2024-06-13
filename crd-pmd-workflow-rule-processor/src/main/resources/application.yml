@@ -13,7 +13,7 @@ crd:
     in:
       queue: QLD.CRI.TIS.ORD.REQUEST.Q12
     out:
-      queue: frk.out.crd.queue
+      queue: QLD.CRI.TIS.ORD.REQUEST.Q11
 spring:
   application:
     name: crd-pmd-wf-rule-processor-app

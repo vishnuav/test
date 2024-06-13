@@ -42,7 +42,7 @@ public class WFRuleRoute extends RouteBuilder {
     from(jmsComponentBean.routeInfo() + inQueue)
       .log("Found message in queue " + inQueue)
       .bean(enrichmentInterceptor, "enrich")
-      .to("activemq:" + outQueue)
+      .to(jmsComponentBean.routeInfo() + outQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .to("file://target/");
   }
