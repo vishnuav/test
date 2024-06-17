@@ -23,6 +23,7 @@ public class EventProcessorRoute extends RouteBuilder {
     this.outQueue = outQueue;
     this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
+    log.info("Activating {} {}", jmsComponentBean.getClass().getSimpleName(), jmsComponentBean.componentInfo());
   }
 
   @Override
