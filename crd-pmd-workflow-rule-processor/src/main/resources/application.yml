@@ -14,6 +14,9 @@ crd:
       queue: QLD.CRI.TIS.ORD.REQUEST.Q12
     out:
       queue: QLD.CRI.TIS.ORD.REQUEST.Q11
+    full-path: ${user.home}/adapters/${spring.application.name}
+    message:
+      folder: ${crd.app.full-path}/messages/
 spring:
   application:
     name: crd-pmd-wf-rule-processor-app
@@ -41,6 +44,8 @@ spring:
 crd:
   app:
     full-path: ${user.home}/adapters/${spring.application.name}
+    message:
+      folder: target/
 ---
 #Development Environment
 environment: dev

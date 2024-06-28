@@ -19,16 +19,18 @@ public class WFRuleRoute extends RouteBuilder {
   public static final String COMPONENT_SEPARATOR = ":";
   private final String inQueue;
   private final String outQueue;
+  private final String messageFolder;
   private final JMSComponentBean jmsComponentBean;
   private final ConnectionFactory connectionFactory;
   private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
 
   public WFRuleRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
-                     JMSComponentBean jmsComponentBean, ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor,
-                     EnrichmentInterceptor enrichmentInterceptor) {
+                     @Value("${crd.app.message.folder}") String messageFolder, JMSComponentBean jmsComponentBean,
+                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
     this.inQueue = inQueue;
     this.outQueue = outQueue;
+    this.messageFolder = messageFolder;
     this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
     this.enrichmentInterceptor = enrichmentInterceptor;
@@ -44,6 +46,6 @@ public class WFRuleRoute extends RouteBuilder {
       .bean(enrichmentInterceptor, "enrich")
       .to(jmsComponentBean.routeInfo() + outQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
-      .to("file://target/");
+      .to("file://" + messageFolder);
   }
 }
