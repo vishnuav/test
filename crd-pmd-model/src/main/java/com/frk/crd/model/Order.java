@@ -14,7 +14,7 @@ import java.util.List;
 
 @Getter
 public class Order implements XMLParsingEligible {
-  private long id;
+  private long orderId;
   @Setter
   private long originalId;
   private String refId;

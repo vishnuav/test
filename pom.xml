@@ -14,6 +14,7 @@
     <module>crd-pmd-utilities</module>
     <module>crd-pmd-model</module>
     <module>crd-pmd-db-sync</module>
+    <module>crd-pmd-db-service</module>
     <module>crd-pmd-jms-processor</module>
     <module>crd-pmd-enrichment-service</module>
     <module>crd-pmd-camel-processing</module>
@@ -63,6 +64,11 @@
       <dependency>
         <groupId>com.frk.crd</groupId>
         <artifactId>crd-pmd-model</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>com.frk.crd</groupId>
+        <artifactId>crd-pmd-db-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
       </dependency>
       <dependency>

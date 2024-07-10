@@ -1,0 +1,18 @@
+package com.frk.crd.sync.model;
+
+import com.frk.crd.core.JsonAware;
+import com.frk.crd.utilities.CRDUtils;
+
+public interface StreamedMessage extends JsonAware, TimeComparable {
+  long getMessageDateTime();
+
+  default long getMessageDate() {
+    return CRDUtils.removeHours(getMessageDateTime());
+  }
+
+  String getMessage();
+
+  default long getComparableTime() {
+    return getMessageDateTime();
+  }
+}

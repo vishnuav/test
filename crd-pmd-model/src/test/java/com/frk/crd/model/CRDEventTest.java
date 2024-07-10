@@ -21,7 +21,7 @@ class CRDEventTest {
     Assertions.assertEquals("PDP-ORDER-STATUS", event.getInputEvent());
     Order order = event.getOrder();
     Assertions.assertNotNull(order);
-    Assertions.assertEquals(5041248783L, order.getId());
+    Assertions.assertEquals(5041248783L, order.getOrderId());
     Assertions.assertEquals("WARR-Order-06-05-2024", order.getRefId());
     Assertions.assertEquals("PREOK", order.getStatus());
     Assertions.assertEquals(40, order.getTargetQty());

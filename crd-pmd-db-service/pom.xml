@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.frk.crd</groupId>
@@ -9,82 +9,37 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>crd-pmd-db-sync</artifactId>
-
+  <groupId>com.frk.crd</groupId>
+  <artifactId>crd-pmd-db-service</artifactId>
   <dependencies>
     <dependency>
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-model</artifactId>
     </dependency>
-    <!-- Spring -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-webflux</artifactId>
-    </dependency>
 
-    <!-- DB -->
+    <!-- Spring Boot JPA -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.xerial</groupId>
-      <artifactId>sqlite-jdbc</artifactId>
-      <version>${sqlite.version}</version>
-    </dependency>
-
-    <!-- Logging -->
-    <dependency>
-      <artifactId>logback-classic</artifactId>
-      <groupId>ch.qos.logback</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>logbook-spring-boot-starter</artifactId>
-      <groupId>org.zalando</groupId>
-    </dependency>
-
-    <!-- Utilities -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-    <dependency>
-      <artifactId>commons-lang3</artifactId>
-      <groupId>org.apache.commons</groupId>
-    </dependency>
-
-    <!-- Testing -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
       <exclusions>
         <exclusion>
-          <artifactId>junit-vintage-engine</artifactId>
-          <groupId>org.junit.vintage</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>junit-jupiter-engine</artifactId>
-          <groupId>org.junit.jupiter</groupId>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-jdbc</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
+    <!-- Oracle JDBC driver -->
+    <!--    <dependency>-->
+    <!--      <groupId>com.oracle.jdbc</groupId>-->
+    <!--      <artifactId>ojdbc10</artifactId>-->
+    <!--      <version>10.2.0.3.0</version>-->
+    <!--    </dependency>-->
+
+    <!-- HikariCP connection pool -->
     <dependency>
-      <artifactId>junit-jupiter</artifactId>
-      <groupId>org.junit.jupiter</groupId>
-      <scope>test</scope>
+      <groupId>com.zaxxer</groupId>
+      <artifactId>HikariCP</artifactId>
+      <version>2.6.0</version>
     </dependency>
   </dependencies>
 
@@ -107,7 +62,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.frk.crd.sync.CRDDBSyncApplication</mainClass>
+              <mainClass>com.frk.crd.sync.CRDDBRestServiceApplication</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>../config/</Class-Path>
@@ -164,7 +119,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.frk.crd.sync.CRDDBSyncApplication</mainClass>
+              <mainClass>com.frk.crd.sync.CRDDBRestServiceApplication</mainClass>
             </manifest>
           </archive>
         </configuration>
