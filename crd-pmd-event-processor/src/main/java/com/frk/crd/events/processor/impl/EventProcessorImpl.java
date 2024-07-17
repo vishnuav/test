@@ -35,10 +35,10 @@ public class EventProcessorImpl implements EventProcessor {
           } else {
             log.info("Event message processed successfully {}", payload);
           }
+          // Add payload to DB
         })
         .subscribe();
     }
-    //
   }
 
   private void hydrateAllocations(CRDBroadCastEvent event) {

@@ -2,11 +2,14 @@ package com.frk.crd.events.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.frk.crd.core.JsonAware;
 import com.frk.crd.core.XMLParsingEligible;
 import org.apache.commons.lang3.StringUtils;
 
-interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
+
+@JsonRootName("SECURITY")
+public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
   String SWAPTION_IRS = "SWPTNIRS";
   String SWAPTION_CREDIT = "SWPTNCDI";
 
