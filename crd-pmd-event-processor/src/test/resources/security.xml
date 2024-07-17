@@ -1,0 +1,65 @@
+
+  String AssetCurrencyCode
+
+  String BusinessDayConversion
+
+  String CalculationAgent
+
+  String CountryOfRisk
+
+  String CRDTableName
+
+  String Cusip
+
+  String ExcerciseSettleFlag
+
+  String ExpireDate
+
+  String ExpireSettleDateAsString
+
+  String ExternalSecId
+
+  String SecId
+
+  String FirstExerciseDate
+
+  String IssuerCode
+
+  String IssuerName
+
+  String IssueCountryCode
+
+  String IssueDateAsString
+
+  String IssueDateAdjustment
+
+  String LocationCurrencyCode
+
+  String MaturityDateAdjustment
+
+  String MarketPx
+
+  String OptionExpireType
+
+  String OtcClearingEligibilityIndicator
+
+  String ParentIssuerCode
+
+  String PayDateHolExchangeCode
+
+  String SecurityIssueDate
+
+  String SecName
+
+  String SecTypeCode
+
+  String StrikePx
+
+  String SwaptionTerm
+
+  String SwapLegIndicator
+
+  String SwapSecId
+
+  String UnderlyingSecId
+

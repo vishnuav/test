@@ -1,35 +1,32 @@
 package com.frk.crd.events.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class BroadcastSecurity implements BroadcastSecurityAware {
-  private String crdTableName;
-  private String secId;
-  private String secName;
-  private String underlyingSecId;
-  private String secTypeCode;
-  private String cusip;
-  private String issueCountryCode;
-  private String assetCurrencyCode;
-  private String externalSecId;
-  private String countryOfRisk;
-  private String issuerCode;
-  private String parentIssuerCode;
-  private String locationCurrencyCode;
-  private String optionExpireType;
-  private String maturityDateAdjustment;
-  private String issuerDateAdjustment;
+  private String crdTableName, assetCurrencyCode, businessDayConversion, calculationAgent, countryOfRisk, cusip, externalSecId, secId,
+    issuerCode, issuerName, issueCountryCode, issueDateAdjustment, locationCurrencyCode, maturityDateAdjustment, optionExpireType,
+    parentIssuerCode, payDateHolExchangeCode, secName, secTypeCode, swaptionTerm, swapLegIndicator,
+    swapSecId, underlyingSecId;
 
-  private boolean otcClearingEligibleIndicator;
+  private boolean otcClearingEligibilityIndicator, exerciseSettleFlag;
 
-  private double strikePx;
-  private double marketPx;
+  private double marketPx, strikePx;
 
-  private long issueDate;
-  private long expireDate;
-  private long firstExerciseDate;
-  private long expireSettleDate;
+  private long expireDate, expireSettleDate, firstExerciseDate, issueDate, securityIssueDate;
+
+  @Override
+  public boolean getExerciseSettleFlag() {
+    return this.exerciseSettleFlag;
+  }
+
+  @Override
+  public boolean getOtcClearingEligibilityIndicator() {
+    return otcClearingEligibilityIndicator;
+  }
 }
