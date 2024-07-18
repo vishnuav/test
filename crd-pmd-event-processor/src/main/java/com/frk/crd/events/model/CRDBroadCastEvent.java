@@ -1,9 +1,10 @@
 package com.frk.crd.events.model;
 
 import com.frk.crd.core.JsonAware;
-import com.frk.crd.model.Order;
-import lombok.Builder;
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class CRDBroadCastEvent implements JsonAware {
@@ -11,9 +12,9 @@ public class CRDBroadCastEvent implements JsonAware {
 
   // To be hydrated
   private String secId;
-  //  private List<BroadcastSecurity> securities = new ArrayList<>();
-  private Order order;
-//  private List<Allocation> allocations = new ArrayList<>()
+  private List<BroadcastSecurity> securities = new ArrayList<>();
+  private BroadcastOrder order;
+  private List<BroadcastAllocation> allocations = new ArrayList<>();
 
   public CRDBroadCastEvent(long orderId) {
     this.orderId = String.valueOf(orderId);
