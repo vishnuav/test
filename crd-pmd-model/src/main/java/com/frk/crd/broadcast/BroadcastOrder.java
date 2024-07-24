@@ -1,6 +1,7 @@
 package com.frk.crd.broadcast;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class BroadcastOrder implements BroadcastOrderAware {
   //        <></CRD_TABLE_NAME>
   @JsonProperty("CRD_TABLE_NAME")
@@ -120,4 +122,12 @@ public class BroadcastOrder implements BroadcastOrderAware {
   //        <></PRIN_SETTLE_CRRNCY>
   @JsonProperty("PRIN_SETTLE_CRRNCY")
   private String principleSettleCurrency = "USD";
+
+  //        <></BKR_NAME>
+  @JsonProperty("BKR_NAME")
+  private String brokerName = "BANK OF AMERICA NA OTC";
+
+  //        <></COUNTERPARTY>
+  @JsonProperty("COUNTERPARTY")
+  private String counterparty = "BOFA0";
 }

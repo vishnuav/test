@@ -24,7 +24,7 @@ class BroadcastSecurityTest {
       "Morgan Stanley &amp; Co Intl Plc", null, null, "US",
       null, "EURO", "438286", null,
       "CALL YUM 120 OTCECO EURO 8/19/2024", "OTCECO", "payDateHolExchangeCode", null,
-      null, "703035994", false, false, 5.0, 120.0,
+      null, "703035994", "N", "N", 5.0, 120.0,
       1L, 1724990400000L, 1L, 1719547200000L, 1L);
 
     String actual = eqOptionCall.toXML();

@@ -32,7 +32,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getCusip();
 
   @JsonProperty("EXERCISE_SETTLE_LAG")
-  boolean getExerciseSettleFlag();
+  String getExerciseSettleFlag();
 
   @JsonProperty("EXPIRE_DATE")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddThh:mm:ss")
@@ -78,7 +78,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getOptionExpireType();
 
   @JsonProperty("OTC_CLEAR_ELIG_IND")
-  boolean getOtcClearingEligibilityIndicator();
+  String getOtcClearingEligibilityIndicator();
 
   @JsonProperty("PARENT_ISSUER_CD")
   String getParentIssuerCode();
