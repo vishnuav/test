@@ -13,15 +13,15 @@
   <dependencies>
     <dependency>
       <groupId>com.frk.crd</groupId>
+      <artifactId>crd-pmd-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-jms-processor</artifactId>
     </dependency>
     <dependency>
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-camel-processing</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

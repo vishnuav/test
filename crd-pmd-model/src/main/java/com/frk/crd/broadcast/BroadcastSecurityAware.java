@@ -1,4 +1,4 @@
-package com.frk.crd.events.model;
+package com.frk.crd.broadcast;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.frk.crd.core.JsonAware;
 import com.frk.crd.core.XMLParsingEligible;
-import com.frk.crd.events.model.serialization.CRDBroadcastBooleanSerializer;
-import com.frk.crd.events.model.serialization.CRDBroadcastDateDeSerializer;
-import com.frk.crd.events.model.serialization.CRDBroadcastDateSerializer;
+import com.frk.crd.broadcast.serialization.CRDBroadcastBooleanSerializer;
+import com.frk.crd.broadcast.serialization.CRDBroadcastDateDeSerializer;
+import com.frk.crd.broadcast.serialization.CRDBroadcastDateSerializer;
 import org.apache.commons.lang3.StringUtils;
 
 

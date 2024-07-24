@@ -1,4 +1,4 @@
-package com.frk.crd.events.model;
+package com.frk.crd.broadcast;
 
 import com.frk.crd.core.JsonAware;
 import com.frk.crd.core.XMLParsingEligible;

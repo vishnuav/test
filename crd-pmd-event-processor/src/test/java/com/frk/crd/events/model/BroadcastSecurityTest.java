@@ -1,5 +1,6 @@
 package com.frk.crd.events.model;
 
+import com.frk.crd.broadcast.BroadcastSecurity;
 import com.frk.crd.converter.CustomJsonMessageConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

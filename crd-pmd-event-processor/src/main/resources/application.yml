@@ -10,10 +10,16 @@ ibm:
     connName: rcovlnx3203(1420)
 crd:
   app:
-    in:
-      queue: frk.out.crd.queue
-    out:
-      queue: frk.out.pmd.queue
+    pmd:
+      in:
+        queue: frd.crd.to.pmd.in.queue
+      forward:
+        queue: frd.crd.to.pmd.forward.queue
+    chub:
+      in:
+        queue: frd.crd.to.chub.in.queue
+      forward:
+        queue: frd.crd.to.chub.forward.queue
 spring:
   application:
     name: crd-pmd-event-processor-app
@@ -31,7 +37,7 @@ spring:
       on-profile: local, default
     name: local
   activemq:
-    brokerUrl: tcp://localhost:61616
+    brokerUrl: tcp://localhost:60720
     inMemory: true
     closeTimeout: true
     user: admin

@@ -1,4 +1,4 @@
-package com.frk.crd.events.model.serialization;
+package com.frk.crd.broadcast.serialization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

@@ -14,22 +14,24 @@ import javax.jms.ConnectionFactory;
 @Slf4j
 @Component
 public class WFRuleRoute extends RouteBuilder {
-  public static final String IBMMQ_COMPONENT = "ibmmq";
-  public static final String ACTIVEMQ_COMPONENT = "activemq";
-  public static final String COMPONENT_SEPARATOR = ":";
-  private final String inQueue;
-  private final String outQueue;
+  private final String pmdInQueue;
+  private final String pmdForwardQueue;
+  private final String chubInQueue;
+  private final String chubForwardQueue;
   private final String messageFolder;
   private final JMSComponentBean jmsComponentBean;
   private final ConnectionFactory connectionFactory;
   private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
 
-  public WFRuleRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
+  public WFRuleRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.in.queue}") String pmdForwardQueue,
+                     @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.in.queue}") String chubForwardQueue,
                      @Value("${crd.app.message.folder}") String messageFolder, JMSComponentBean jmsComponentBean,
                      ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
-    this.inQueue = inQueue;
-    this.outQueue = outQueue;
+    this.pmdInQueue = pmdInQueue;
+    this.pmdForwardQueue = pmdForwardQueue;
+    this.chubInQueue = chubInQueue;
+    this.chubForwardQueue = chubForwardQueue;
     this.messageFolder = messageFolder;
     this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
@@ -41,10 +43,19 @@ public class WFRuleRoute extends RouteBuilder {
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-    from(jmsComponentBean.routeInfo() + inQueue)
-      .log("Found message in queue " + inQueue)
+    // CRD to Putnam WF Rule Processor
+    from(jmsComponentBean.routeInfo() + pmdInQueue)
+      .log("Found message in queue " + pmdInQueue)
       .bean(enrichmentInterceptor, "enrich")
-      .to(jmsComponentBean.routeInfo() + outQueue)
+      .to(jmsComponentBean.routeInfo() + pmdForwardQueue)
+      .to("log:com.frk.crd?level=INFO&groupSize=10")
+      .to("file://" + messageFolder);
+
+    // CRD to Contract Hub WF Rule Processor
+    from(jmsComponentBean.routeInfo() + chubInQueue)
+      .log("Found message in queue " + pmdInQueue)
+      .bean(enrichmentInterceptor, "enrich")
+      .to(jmsComponentBean.routeInfo() + chubForwardQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .to("file://" + messageFolder);
   }

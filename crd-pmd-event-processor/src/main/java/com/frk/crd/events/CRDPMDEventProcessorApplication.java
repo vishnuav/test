@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = "com.frk.crd")
+@SpringBootApplication(scanBasePackages = "com.frk.crd.events")
 public class CRDPMDEventProcessorApplication {
   public static void main(String[] args) {
     log.info("Starting CRD to PMD Event Processor Application Application");

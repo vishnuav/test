@@ -1,6 +1,6 @@
 package com.frk.crd.events.processor.impl;
 
-import com.frk.crd.events.model.CRDBroadCastEvent;
+import com.frk.crd.broadcast.CRDBroadCastEvent;
 import com.frk.crd.events.processor.EventProcessor;
 import com.frk.crd.model.Order;
 import lombok.extern.slf4j.Slf4j;

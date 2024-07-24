@@ -10,10 +10,16 @@ ibm:
     connName: rcovlnx3203(1420)
 crd:
   app:
-    in:
-      queue: QLD.CRI.TIS.ORD.REQUEST.Q12
-    out:
-      queue: QLD.CRI.TIS.ORD.REQUEST.Q11
+    pmd:
+      in:
+        queue: frd.crd.to.pmd.in.queue
+      forward:
+        queue: frd.crd.to.pmd.forward.queue
+    chub:
+      in:
+        queue: frd.crd.to.chub.in.queue
+      forward:
+        queue: frd.crd.to.chub.forward.queue
     full-path: ${user.home}/adapters/${spring.application.name}
     message:
       folder: ${crd.app.full-path}/messages/
@@ -43,9 +49,17 @@ spring:
       trusted: com.broker.activemq.entities,java.lang
 crd:
   app:
+    pmd:
+      in:
+        queue: frd.crd.to.pmd.in.queue
+      forward:
+        queue: frd.crd.to.pmd.forward.queue
+    chub:
+      in:
+        queue: frd.crd.to.chub.in.queue
+      forward:
+        queue: frd.crd.to.chub.forward.queue
     full-path: ${user.home}/adapters/${spring.application.name}
-    message:
-      folder: target/
 ---
 #Development Environment
 environment: dev

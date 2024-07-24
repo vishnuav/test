@@ -19,7 +19,6 @@ import javax.jms.ConnectionFactory;
 @EnableConfigurationProperties
 @Conditional(value = {JMSDefaultLocalConfigurationCondition.class})
 public class CRDActiveMQConfiguration {
-
   @Getter
   @Value(value = "${spring.activemq.brokerUrl}")
   private String brokerURL;

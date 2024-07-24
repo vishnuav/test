@@ -13,17 +13,22 @@ import javax.jms.ConnectionFactory;
 @Slf4j
 @Component
 public class EventProcessorRoute extends RouteBuilder {
-  private final String inQueue;
-  private final String outQueue;
+  private final String pmdInQueue;
+  private final String pmdOutQueue;
+  private final String chubInQueue;
+  private final String chubOutQueue;
   private final EventProcessor eventProcessor;
 
   private final JMSComponentBean jmsComponentBean;
   private final ConnectionFactory connectionFactory;
 
-  public EventProcessorRoute(@Value("${crd.app.in.queue}") String inQueue, @Value("${crd.app.out.queue}") String outQueue,
+  public EventProcessorRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.in.queue}") String pmdOutQueue,
+                             @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.in.queue}") String chubOutQueue,
                              EventProcessor eventProcessor, JMSComponentBean jmsComponentBean, ConnectionFactory connectionFactory) {
-    this.inQueue = inQueue;
-    this.outQueue = outQueue;
+    this.pmdInQueue = pmdInQueue;
+    this.pmdOutQueue = pmdOutQueue;
+    this.chubInQueue = chubInQueue;
+    this.chubOutQueue = chubOutQueue;
     this.eventProcessor = eventProcessor;
     this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
@@ -34,9 +39,17 @@ public class EventProcessorRoute extends RouteBuilder {
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
     getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-    from(jmsComponentBean.routeInfo() + inQueue)
-      .bean(eventProcessor, "enrich")
+
+    // CRD to Putnam Route
+    from(jmsComponentBean.routeInfo() + pmdInQueue)
+      .bean(eventProcessor, "process")
       .to("log:com.frk.crd?level=INFO&groupSize=10")
-      .log("Found message in queue " + inQueue);
+      .log("Found message in queue " + pmdInQueue);
+
+    // CRD to Contract Hub Route
+    from(jmsComponentBean.routeInfo() + pmdInQueue)
+      .bean(eventProcessor, "process")
+      .to("log:com.frk.crd?level=INFO&groupSize=10")
+      .log("Found message in queue " + pmdInQueue);
   }
 }
