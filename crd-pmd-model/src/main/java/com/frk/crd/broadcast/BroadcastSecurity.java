@@ -3,10 +3,11 @@ package com.frk.crd.broadcast;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class BroadcastSecurity implements BroadcastSecurityAware {
   private String crdTableName, assetCurrencyCode, businessDayConversion, calculationAgent, countryOfRisk, cusip, externalSecId, secId,
     issuerCode, issuerName, issueCountryCode, issueDateAdjustment, locationCurrencyCode, maturityDateAdjustment, optionExpireType,

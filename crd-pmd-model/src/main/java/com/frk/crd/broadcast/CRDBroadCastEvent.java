@@ -1,16 +1,22 @@
 package com.frk.crd.broadcast;
 
-import com.frk.crd.core.JsonAware;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.frk.crd.core.XMLParsingEligible;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class CRDBroadCastEvent implements JsonAware {
-  private final String orderId;
+@Setter
+@NoArgsConstructor
+public class CRDBroadCastEvent implements XMLParsingEligible {
+  @JsonIgnore
+  private String orderId;
 
-  // To be hydrated
+  @JsonIgnore
   private String secId;
   private List<BroadcastSecurity> securities = new ArrayList<>();
   private BroadcastOrder order;
@@ -18,5 +24,17 @@ public class CRDBroadCastEvent implements JsonAware {
 
   public CRDBroadCastEvent(long orderId) {
     this.orderId = String.valueOf(orderId);
+  }
+
+  public void withOrder(BroadcastOrder broadcastOrder) {
+    this.order = broadcastOrder;
+  }
+
+  public void withAllocations(BroadcastAllocation broadcastAllocation) {
+    this.allocations.add(broadcastAllocation);
+  }
+
+  public void withSecurity(BroadcastSecurity broadcastSecurity) {
+    this.securities.add(broadcastSecurity);
   }
 }

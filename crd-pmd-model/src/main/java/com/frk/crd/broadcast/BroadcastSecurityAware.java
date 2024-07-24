@@ -4,18 +4,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.frk.crd.core.JsonAware;
 import com.frk.crd.core.XMLParsingEligible;
-import com.frk.crd.broadcast.serialization.CRDBroadcastBooleanSerializer;
-import com.frk.crd.broadcast.serialization.CRDBroadcastDateDeSerializer;
-import com.frk.crd.broadcast.serialization.CRDBroadcastDateSerializer;
 import org.apache.commons.lang3.StringUtils;
 
 
 @JsonRootName("SECURITY")
-public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
+public interface BroadcastSecurityAware extends XMLParsingEligible {
   String SWAPTION_IRS = "SWPTNIRS";
   String SWAPTION_CREDIT = "SWPTNCDI";
 
@@ -41,13 +35,10 @@ public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
   boolean getExerciseSettleFlag();
 
   @JsonProperty("EXPIRE_DATE")
-  @JsonSerialize(using = CRDBroadcastDateSerializer.class)
-  @JsonDeserialize(using = CRDBroadcastDateDeSerializer.class)
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddThh:mm:ss")
   long getExpireDate();
 
   @JsonProperty("EXPIRE_SETTLE_DATE")
-  @JsonSerialize(using = CRDBroadcastDateSerializer.class)
   long getExpireSettleDate();
 
   @JsonProperty("EXT_SEC_ID")
@@ -57,8 +48,6 @@ public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
   String getSecId();
 
   @JsonProperty("FRST_EXERCISE_DATE")
-  @JsonSerialize(using = CRDBroadcastDateSerializer.class)
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddThh:mm:ss")
   long getFirstExerciseDate();
 
   @JsonProperty("ISSUER_CD")
@@ -71,7 +60,6 @@ public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
   String getIssueCountryCode();
 
   @JsonProperty("ISSUE_DATE")
-  @JsonSerialize(using = CRDBroadcastDateSerializer.class)
   long getIssueDate();
 
   @JsonProperty("ISSUE_DATE_ADJ")
@@ -90,7 +78,6 @@ public interface BroadcastSecurityAware extends JsonAware, XMLParsingEligible {
   String getOptionExpireType();
 
   @JsonProperty("OTC_CLEAR_ELIG_IND")
-  @JsonSerialize(using = CRDBroadcastBooleanSerializer.class)
   boolean getOtcClearingEligibilityIndicator();
 
   @JsonProperty("PARENT_ISSUER_CD")

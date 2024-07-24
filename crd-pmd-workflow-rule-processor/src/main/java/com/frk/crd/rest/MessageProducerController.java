@@ -22,7 +22,7 @@ public class MessageProducerController {
   }
 
   @PostMapping(path = DiscoveryService.PUBLISH_MESSAGE, produces = MediaType.TEXT_PLAIN_VALUE)
-  public void publishMessage(@RequestParam("queueName") String queueName, @RequestBody String payload) {
+  public void publishPutnamMessage(@RequestParam("queueName") String queueName, @RequestBody String payload) {
     try {
       jmsTemplate.send(queueName, messageCreator -> {
         TextMessage message = messageCreator.createTextMessage();

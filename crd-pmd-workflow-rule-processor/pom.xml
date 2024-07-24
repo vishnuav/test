@@ -22,6 +22,10 @@
     </dependency>
     <dependency>
       <groupId>com.frk.crd</groupId>
+      <artifactId>crd-pmd-event-processor</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-jms-processor</artifactId>
     </dependency>
     <dependency>

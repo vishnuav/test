@@ -38,18 +38,18 @@ public class EventProcessorRoute extends RouteBuilder {
   @Override
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
-    getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-
-    // CRD to Putnam Route
-    from(jmsComponentBean.routeInfo() + pmdInQueue)
-      .bean(eventProcessor, "process")
-      .to("log:com.frk.crd?level=INFO&groupSize=10")
-      .log("Found message in queue " + pmdInQueue);
-
-    // CRD to Contract Hub Route
-    from(jmsComponentBean.routeInfo() + pmdInQueue)
-      .bean(eventProcessor, "process")
-      .to("log:com.frk.crd?level=INFO&groupSize=10")
-      .log("Found message in queue " + pmdInQueue);
+//    getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+//
+//    // CRD to Putnam Route
+//    from(jmsComponentBean.routeInfo() + pmdInQueue)
+//      .bean(eventProcessor, "process")
+//      .to("log:com.frk.crd?level=INFO&groupSize=10")
+//      .log("Found message in queue " + pmdInQueue);
+//
+//    // CRD to Contract Hub Route
+//    from(jmsComponentBean.routeInfo() + pmdInQueue)
+//      .bean(eventProcessor, "process")
+//      .to("log:com.frk.crd?level=INFO&groupSize=10")
+//      .log("Found message in queue " + pmdInQueue);
   }
 }
