@@ -1,16 +1,15 @@
 package com.frk.crd.db.model;
 
 import com.frk.crd.core.IExceptionMessage;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Slf4j
 @Entity
@@ -37,6 +36,6 @@ public class DBExceptionMessage implements IExceptionMessage {
 
   public DBExceptionMessage(IExceptionMessage message) {
     this(message.getId(), message.getSourceName(), message.getDestinationType(), message.getDestinationURL(), message.getPayload(),
-      message.getStatus(), message.getExceptionDateTime());
+        message.getStatus(), message.getExceptionDateTime());
   }
 }

@@ -1,13 +1,12 @@
 package com.frk.crd.db.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Objects;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -31,8 +30,10 @@ public class DBStreamedMessage implements StreamedMessage {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     DBStreamedMessage that = (DBStreamedMessage) o;
     return messageDateTime == that.messageDateTime && Objects.equals(message, that.message);
   }

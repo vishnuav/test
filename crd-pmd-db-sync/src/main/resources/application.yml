@@ -78,6 +78,23 @@ crd:
     db:
       dir: ${crd.app.full-path}/db
 ---
+#Development Environment 2
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2
+    name: dev2
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.OracleDialect
+  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: vayyala
+    password: Weclome#321
+---
 #Development Environment
 environment: dev
 spring:
