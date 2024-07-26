@@ -35,32 +35,19 @@ public class DBBroadcastOrder implements Serializable {
   private String targetDiscountRate;
   private String executionDiscountRate;
   private String principleLocalCurrencySecId;
-
   private String udfFloat16;
-
   private String taxLotSellConvention;
-
   private Double netPrincipleAmount;
-
   private Double targetNotionalBaseAmount;
-
   private Double targetNotionalAmount;
-
   private Double executionPx;
-
   private Double executionQuantity;
-
   private Double executionAmount;
-
   private Double netMoney;
-
   private String commissionIndicator;
-
   private Double commissionAmount;
-
   private Double currentBaseMarketValue;
-
   private String accountCode;
-
   private String transactionSubType;
+  private String secId;
 }

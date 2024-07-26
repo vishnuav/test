@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.frk.crd.core.XMLParsingEligible;
+import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -36,10 +37,10 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
 
   @JsonProperty("EXPIRE_DATE")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddThh:mm:ss")
-  long getExpireDate();
+  Date getExpireDate();
 
   @JsonProperty("EXPIRE_SETTLE_DATE")
-  long getExpireSettleDate();
+  Date getExpireSettleDate();
 
   @JsonProperty("EXT_SEC_ID")
   String getExternalSecId();
@@ -48,7 +49,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getSecId();
 
   @JsonProperty("FRST_EXERCISE_DATE")
-  long getFirstExerciseDate();
+  Date getFirstExerciseDate();
 
   @JsonProperty("ISSUER_CD")
   String getIssuerCode();
@@ -60,7 +61,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getIssueCountryCode();
 
   @JsonProperty("ISSUE_DATE")
-  long getIssueDate();
+  Date getIssueDate();
 
   @JsonProperty("ISSUE_DATE_ADJ")
   String getIssueDateAdjustment();
@@ -87,7 +88,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getPayDateHolExchangeCode();
 
   @JsonProperty("SEC_ISSUE_DATE")
-  long getSecurityIssueDate();
+  Date getSecurityIssueDate();
 
   @JsonProperty("SEC_NAME")
   String getSecName();

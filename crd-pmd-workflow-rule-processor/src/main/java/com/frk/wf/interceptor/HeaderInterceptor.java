@@ -1,4 +1,4 @@
-package com.frk.crd.interceptor;
+package com.frk.wf.interceptor;
 
 import com.frk.crd.converter.CustomJsonMessageConverter;
 import com.frk.crd.model.CRDEvent;

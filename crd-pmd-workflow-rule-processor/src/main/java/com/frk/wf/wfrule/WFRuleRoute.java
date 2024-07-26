@@ -1,8 +1,8 @@
-package com.frk.crd.wfrule;
+package com.frk.wf.wfrule;
 
 import com.frk.crd.events.processor.EventProcessor;
-import com.frk.crd.interceptor.EnrichmentInterceptor;
-import com.frk.crd.interceptor.HeaderInterceptor;
+import com.frk.wf.interceptor.EnrichmentInterceptor;
+import com.frk.wf.interceptor.HeaderInterceptor;
 import com.frk.crd.jms.model.JMSComponentBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;

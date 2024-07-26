@@ -50,7 +50,8 @@ public class DBBroadcastOrderRepositoryImpl implements DBBroadcastOrderRepositor
       + " oa.COMMISION_AMT, "
       + " oa.CUR_BASE_MKT_VAL, "
       + " oa.ACCT_CD, "
-      + " oss.TRANS_SUB_TYPE "
+      + " oss.TRANS_SUB_TYPE, "
+      + " o.SEC_ID "
       + "  from crd_owner.ts_order o "
       + "  join crd_owner.ts_order_sec_spec oss on o.order_id = oss.order_id "
       + "  join crd_owner.ts_order_alloc oa on o.order_id = oa.order_id "
@@ -118,7 +119,6 @@ public class DBBroadcastOrderRepositoryImpl implements DBBroadcastOrderRepositor
           order.setTargetDiscountRate(resultSet.getString(25));
           order.setExecutionDiscountRate(resultSet.getString(26));
           order.setPrincipleLocalCurrencySecId(resultSet.getString(27));
-
           order.setUdfFloat16(resultSet.getString(28));
           order.setTaxLotSellConvention(resultSet.getString(29));
           order.setNetPrincipleAmount(resultSet.getDouble(30));
@@ -133,7 +133,7 @@ public class DBBroadcastOrderRepositoryImpl implements DBBroadcastOrderRepositor
           order.setCurrentBaseMarketValue(resultSet.getDouble(39));
           order.setAccountCode(resultSet.getString(40));
           order.setTransactionSubType(resultSet.getString(41));
-
+          order.setSecId(resultSet.getString(42));
         });
     return order;
   }

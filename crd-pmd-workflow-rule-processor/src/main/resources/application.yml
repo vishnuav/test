@@ -10,6 +10,8 @@ ibm:
     connName: rcovlnx3203(1420)
 crd:
   app:
+    db:
+      dir: ${user.home}/crd-app/${environment}/db
     pmd:
       in:
         queue: frd.crd.to.pmd.in.queue
@@ -26,6 +28,108 @@ crd:
 spring:
   application:
     name: crd-pmd-wf-rule-processor-app
+  web:
+    locale: en_US
+  main:
+    banner-mode: off
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    show-sql: false
+#    database-platform: com.frk.crd.db.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+        generate_statistics: true
+  datasource:
+#  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: vayyala
+    password: Weclome#321
+#    url: jdbc:sqlite:${crd.app.db.dir}/crd.db
+#    driver-class-name: org.sqlite.JDBC
+#    username: sa
+#    password: sa
+    hikari:
+      data-source-properties:
+        cache_size: 4096
+      maximum-pool-size: 64
+#Logging Properties
+logging:
+  file:
+    path: ${crd.app.full-path}/logs
+  level:
+    jdbc:
+      sqlonly: info
+      resultsettable: info
+      sqltiming: info
+      audit: info
+      resultset: info
+      connection: info
+---
+#Local Environment
+environment: local
+logging:
+  file:
+    path: ${user.home}/crd-app/${environment}/logs
+ibm:
+  mq:
+    initial:
+      context:
+        url: file:${user.home}/jndi-dir
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local
+server:
+  port: 6010
+crd:
+  app:
+    full-path: ${user.home}/adapters/${spring.application.name}
+    db:
+      dir: ${crd.app.full-path}/db
+---
+#Development Environment 2
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2
+    name: dev2
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.OracleDialect
+  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: vayyala
+    password: Weclome#321
+---
+#Development Environment 2
+environment: local
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.OracleDialect
+  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: vayyala
+    password: Weclome#321
 ---
 #Local Environment
 environment: local

@@ -3,6 +3,7 @@ package com.frk.crd.db.dao.impl;
 import com.frk.crd.db.configuration.CRDDBSyncConfiguration;
 import com.frk.crd.db.dao.DBBroadcastOrderRepository;
 import com.frk.crd.db.model.DBBroadcastOrder;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -65,5 +66,12 @@ class DBBroadcastOrderRepositoryImplTest {
     Assertions.assertEquals(1000000.0, order.getCurrentBaseMarketValue());
     Assertions.assertEquals("Test55", order.getAccountCode());
     Assertions.assertEquals("OPEN", order.getTransactionSubType());
+    Assertions.assertEquals("5047678918", order.getSecId());
+  }
+
+  @Test
+  void bulkOrders() {
+    DBBroadcastOrder order = repository.getOrder("5047678919");
+    Assertions.assertNotNull(order);
   }
 }

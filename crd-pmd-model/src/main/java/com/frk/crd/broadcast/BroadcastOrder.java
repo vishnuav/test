@@ -93,7 +93,7 @@ public class BroadcastOrder implements BroadcastOrderAware {
 
   //        <></TARGET_AMT>
   @JsonProperty("TARGET_AMT")
-  private double targetAmount900000000;
+  private double targetAmount;
 
   //        <></PRIN_LOCAL_CRRNCY_SEC_ID>
   @JsonProperty("PRIN_LOCAL_CRRNCY_SEC_ID")
