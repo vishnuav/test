@@ -1,18 +1,20 @@
 package com.frk.crd.jms.service;
 
 import com.frk.crd.jms.configuration.CRDJMSConfigurationTest;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 
+@Slf4j
 class MessagePublishServiceTest extends CRDJMSConfigurationTest {
-  @Value(value = "${crd.app.in.queue}")
-  protected String queueName;
-
   @Test
-  void publishMessage() {
-    messagePublishService.sendToQueue(queueName, "Test-Payload");
-//    Awaitility.await().pollDelay(1, TimeUnit.SECONDS).until(() -> true);
-//    Message message = jmsTemplate.receive(queueName);
-//    Assertions.assertNotNull(message);
+  void publishMessage() throws InterruptedException {
+    String sentMessage = "Test-Payload";
+    messagePublishService.sendToQueue(pmdInQueue, sentMessage);
+    Object message = jmsTemplate.receiveAndConvert(pmdInQueue);
+    Assertions.assertNotNull(message);
+    String receivedMessage = message.toString();
+    Assertions.assertTrue(StringUtils.contains(receivedMessage, sentMessage));
   }
 }

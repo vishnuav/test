@@ -1,3 +1,49 @@
+environment: local
+crd:
+  app:
+    pmd:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+      forward:
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
+    chub:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+      forward:
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
+    full-path: ${user.home}/adapters/${spring.application.name}
+    message:
+      folder: ${crd.app.full-path}/messages/
+camel:
+  component:
+    jms:
+      acknowledgement-mode-name: AUTO_ACKNOWLEDGE
+spring:
+  application:
+    name: CRD-JMS-PROCESSOR-${environment}
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    inMemory: true
+    closeTimeout: true
+    packages:
+      truested: com.broker.activemq.entities,java.lang
+    pool:
+      enabled: true
+      max-connections: 10
+      max-sessions-per-connection: 10
+    user: admin
+    password: admin
+logging:
+  file:
+    path: ${crd.app.full-path}/logs
+---
+#Dev2 Environment
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2
+    name: dev2
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -5,18 +51,3 @@ ibm:
     host: rcovlnx3203
     port: 1420
     connName: rcovlnx3203(1420)
-crd:
-  app:
-    in:
-      queue: QLD.CRI.TIS.ORD.REQUEST.Q12
-    out:
-      queue: frk.out.queue
-spring:
-  activemq:
-    brokerUrl: tcp://localhost:61616
-    inMemory: true
-    closeTimeout: true
-    user: admin
-    password: admin
-    packages:
-      truested: com.broker.activemq.entities,java.lang

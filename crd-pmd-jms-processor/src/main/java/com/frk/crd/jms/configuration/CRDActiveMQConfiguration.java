@@ -36,10 +36,11 @@ public class CRDActiveMQConfiguration {
 
   @Bean
   public ConnectionFactory connectionFactory() {
-    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory();
-    connectionFactory.setBrokerURL(brokerURL);
-    connectionFactory.setUserName(brokerUser);
-    connectionFactory.setPassword(brokerPassword);
+    ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(brokerUser, brokerPassword, brokerURL);
+    connectionFactory.setTrustAllPackages(true);
+//    connectionFactory.setBrokerURL(brokerURL);
+//    connectionFactory.setUserName(brokerUser);
+//    connectionFactory.setPassword(brokerPassword);
     return connectionFactory;
   }
 
