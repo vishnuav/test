@@ -37,7 +37,7 @@ public class DBSyncServiceImpl implements DBSyncService {
       Flux.fromIterable(messages)
         .map(DBStreamedMessage::new)
         .collectList()
-//        .doOnNext(streamedMessageRepository::saveAll)
+        .doOnNext(streamedMessageRepository::saveAll)
         .doOnError(exception -> log.error("Unable to sync {} streamed messages", messages.size(), exception))
         .doOnSuccess(v -> {
           int savedCount = v.size();
@@ -60,7 +60,7 @@ public class DBSyncServiceImpl implements DBSyncService {
       Flux.fromIterable(messages)
         .map(DBExceptionMessage::new)
         .collectList()
-//        .doOnNext(exceptionMessageRepository::saveAll)
+        .doOnNext(exceptionMessageRepository::saveAll)
         .doOnError(exception -> log.error("Unable to sync {} exception messages", messages.size(), exception))
         .doOnSuccess(v -> {
           int savedCount = v.size();

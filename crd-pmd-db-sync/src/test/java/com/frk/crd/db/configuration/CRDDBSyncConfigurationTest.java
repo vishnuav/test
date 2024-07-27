@@ -23,8 +23,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class CRDDBSyncConfigurationTest {
   @Value("${server.port}")
   protected int serverPort;
-  @Value("${local.host}")
-  protected String host;
 
   @Autowired
   protected StreamedMessageRepository dbStreamedMessageRepository;

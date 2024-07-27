@@ -20,6 +20,7 @@
     <module>crd-exception-handler</module>
     <module>crd-pmd-workflow-rule-processor</module>
     <module>crd-pmd-event-processor</module>
+    <module>test-embedded-db</module>
   </modules>
   <modelVersion>4.0.0</modelVersion>
   <version>0.0.1-SNAPSHOT</version>
@@ -31,7 +32,8 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <!-- db -->
-    <sqlite.version>3.34.0</sqlite.version>
+    <ojdbc11.version>23.3.0.23.09</ojdbc11.version>
+
     <!-- camel -->
     <camel-version>2.24.0</camel-version>
     <!-- Logging REST -->
@@ -50,6 +52,11 @@
   <artifactId>crd-pmd-poc</artifactId>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.frk.crd</groupId>
+        <artifactId>test-embedded-db</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
       <dependency>
         <groupId>com.frk.crd</groupId>
         <artifactId>crd-pmd-assembly</artifactId>

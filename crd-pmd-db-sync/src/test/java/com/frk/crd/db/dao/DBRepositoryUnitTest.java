@@ -18,10 +18,13 @@ import java.util.Optional;
 
 @Slf4j
 class DBRepositoryUnitTest extends CRDDBSyncConfigurationTest {
+
+  public static final String TEST_MESSAGE = "test";
+
   @Test
   void saveStreamedMessageWithEmptyConstructor() {
     DBStreamedMessage message = new DBStreamedMessage();
-    message.setMessage(StringUtils.EMPTY);
+    message.setMessage(TEST_MESSAGE);
     long aMinuteAgo = System.currentTimeMillis() - Duration.ofMillis(1).toMillis();
     message.setMessageDateTime(aMinuteAgo);
     dbStreamedMessageRepository.save(message);
@@ -29,7 +32,7 @@ class DBRepositoryUnitTest extends CRDDBSyncConfigurationTest {
     Assertions.assertTrue(byId.isPresent());
     DBStreamedMessage fromDB = byId.get();
     Assertions.assertNotNull(fromDB);
-    Assertions.assertEquals(StringUtils.EMPTY, fromDB.getMessage());
+    Assertions.assertEquals(TEST_MESSAGE, fromDB.getMessage());
     Assertions.assertEquals(aMinuteAgo, fromDB.getMessageDateTime());
     Assertions.assertEquals(CRDUtils.removeHours(aMinuteAgo), fromDB.getMessageDate());
   }
@@ -37,7 +40,7 @@ class DBRepositoryUnitTest extends CRDDBSyncConfigurationTest {
   @Test
   void saveStreamedMessageWithAllArgsConstructor() {
     long aMinuteAgo = System.currentTimeMillis() - Duration.ofMillis(1).toMillis();
-    DBStreamedMessage message = new DBStreamedMessage(aMinuteAgo, StringUtils.EMPTY);
+    DBStreamedMessage message = new DBStreamedMessage(aMinuteAgo, TEST_MESSAGE);
     dbStreamedMessageRepository.save(message);
     List<DBStreamedMessage> allMessages = dbStreamedMessageRepository.findAll();
     Assertions.assertNotNull(allMessages);
@@ -46,7 +49,7 @@ class DBRepositoryUnitTest extends CRDDBSyncConfigurationTest {
     Assertions.assertTrue(byId.isPresent());
     DBStreamedMessage fromDB = byId.get();
     Assertions.assertNotNull(fromDB);
-    Assertions.assertEquals(StringUtils.EMPTY, fromDB.getMessage());
+    Assertions.assertEquals(TEST_MESSAGE, fromDB.getMessage());
     Assertions.assertEquals(aMinuteAgo, fromDB.getMessageDateTime());
     Assertions.assertEquals(CRDUtils.removeHours(aMinuteAgo), fromDB.getMessageDate());
   }
