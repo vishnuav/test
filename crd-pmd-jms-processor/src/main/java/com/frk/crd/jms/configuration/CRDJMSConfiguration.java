@@ -1,9 +1,18 @@
 package com.frk.crd.jms.configuration;
 
+import com.frk.crd.jms.model.ActiveMQProperties;
+import com.frk.crd.jms.model.IBMMQProperties;
+import com.ibm.mq.jms.MQQueueConnectionFactory;
+import com.ibm.msg.client.wmq.WMQConstants;
+import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.BrokerService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.destination.DynamicDestinationResolver;
 
@@ -21,8 +30,6 @@ public class CRDJMSConfiguration {
     JmsTemplate jmsTemplate = new JmsTemplate();
     jmsTemplate.setConnectionFactory(connectionFactory);
     jmsTemplate.setDestinationResolver(destinationResolver);
-    // todo FixMe: Set this to false - for AMQ
-    jmsTemplate.setPubSubDomain(true);
     jmsTemplate.setDeliveryPersistent(true);
     return jmsTemplate;
   }

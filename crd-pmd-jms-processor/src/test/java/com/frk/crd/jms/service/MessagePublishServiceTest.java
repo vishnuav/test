@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 class MessagePublishServiceTest extends CRDJMSConfigurationTest {
   @Test
-  void publishMessage() throws InterruptedException {
+  void publishMessage() {
     String sentMessage = "Test-Payload";
     messagePublishService.sendToQueue(pmdInQueue, sentMessage);
     Object message = jmsTemplate.receiveAndConvert(pmdInQueue);

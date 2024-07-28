@@ -21,6 +21,16 @@ camel:
 spring:
   application:
     name: CRD-JMS-PROCESSOR-${environment}
+logging:
+  file:
+    path: ${crd.app.full-path}/logs
+---
+#ActiveMQ Environment
+spring:
+  config:
+    activate:
+      on-profile: activemq
+    name: activemq
   activemq:
     brokerUrl: tcp://localhost:61616
     inMemory: true
@@ -33,17 +43,13 @@ spring:
       max-sessions-per-connection: 10
     user: admin
     password: admin
-logging:
-  file:
-    path: ${crd.app.full-path}/logs
 ---
-#Dev2 Environment
-environment: dev2
+#IBMMQ Environment
 spring:
   config:
     activate:
-      on-profile: dev2
-    name: dev2
+      on-profile: ibmmq
+    name: ibmmq
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -51,3 +57,35 @@ ibm:
     host: rcovlnx3203
     port: 1420
     connName: rcovlnx3203(1420)
+---
+#Local/Default Environment
+environment: local
+spring:
+  config:
+    activate:
+      on-profile: local, default, activemq
+    name: local
+---
+#Dev2 Environment
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2, ibmmq
+    name: dev2
+---
+#UAT Environment
+environment: uat
+spring:
+  config:
+    activate:
+      on-profile: uat, ibmmq
+    name: uat
+---
+#Production Environment
+environment: prod
+spring:
+  config:
+    activate:
+      on-profile: prod, ibmmq
+    name: prod

@@ -165,6 +165,23 @@ crd:
         queue: frd.crd.to.chub.forward.queue
     full-path: ${user.home}/adapters/${spring.application.name}
 ---
+#Local/Default Environment
+environment: local
+spring:
+  config:
+    activate:
+      on-profile: local, default
+    name: local, default
+server:
+  port: 7040
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
+---
 #Development Environment
 environment: dev
 spring:
@@ -174,6 +191,30 @@ spring:
     name: dev
 server:
   port: 7040
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
+---
+#Development Environment-2
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2
+    name: dev2
+server:
+  port: 7040
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
 ---
 #UAT Environment
 environment: uat
@@ -184,6 +225,13 @@ spring:
     name: uat
 server:
   port: 8040
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)
 ---
 #Production Environment
 environment: prod
@@ -192,3 +240,10 @@ spring:
     activate:
       on-profile: prod
     name: prod
+ibm:
+  mq:
+    queueManager: MWDEV01A
+    channel: MWDEV01.A.CLNTCONN
+    host: rcovlnx3203
+    port: 1420
+    connName: rcovlnx3203(1420)

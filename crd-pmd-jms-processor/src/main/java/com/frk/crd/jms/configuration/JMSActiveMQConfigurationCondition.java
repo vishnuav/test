@@ -4,10 +4,9 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-public class JMSHigherEnvironmentConfigurationCondition implements Condition {
+public class JMSActiveMQConfigurationCondition implements Condition {
   @Override
   public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-    Condition condition = new JMSDefaultLocalConfigurationCondition();
-    return !condition.matches(context, metadata);
+    return context.getEnvironment().acceptsProfiles("activemq");
   }
 }

@@ -4,6 +4,15 @@ crd:
 spring:
   application:
     name: CRD-DB-SYNC
+logging:
+  file:
+    path: ${crd.app.full-path}/logs/${environment}
+server:
+  port: 6010
+---
+#H2 Environment
+environment: h2
+spring:
   sql:
     init:
       mode: always
@@ -20,32 +29,22 @@ spring:
     username: admin
     password: admin
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:~/crd-h2-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;MODE=ORACLE;
+    url: jdbc:h2:mem:crd-h2-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;MODE=ORACLE;
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true
-logging:
-  file:
-    path: ${crd.app.full-path}/logs/${environment}
-server:
-  port: 6010
+  config:
+    activate:
+      on-profile: h2
+    name: h2
 ---
-#Local Default Environment
-#Local Environment
-environment: local
+#Oracle Environment
+environment: oracle
 spring:
   config:
     activate:
-      on-profile: local, default
-    name: local
----
-#Development Environment 2
-environment: dev2
-spring:
-  config:
-    activate:
-      on-profile: dev2
-    name: dev2
+      on-profile: oracle
+    name: oracle
   jpa:
     hibernate:
       ddl-auto: none
@@ -55,5 +54,22 @@ spring:
     driver-class-name: oracle.jdbc.OracleDriver
     username: vayyala
     password: Weclome#321
+---
+#Local Default Environment
+#Local Environment
+environment: local
+spring:
+  config:
+    activate:
+      on-profile: local, default, h2
+    name: local
+---
+#Development Environment 2
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2, oracle
+    name: dev2
 server:
   port: 7010
