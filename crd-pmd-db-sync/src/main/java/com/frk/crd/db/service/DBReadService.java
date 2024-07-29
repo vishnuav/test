@@ -1,7 +1,7 @@
 package com.frk.crd.db.service;
 
 import com.frk.crd.core.IExceptionMessage;
-import com.frk.crd.db.model.IOrder;
+import com.frk.crd.model.IOrder;
 import com.frk.crd.model.IAllocation;
 import com.frk.crd.model.ISecurity;
 

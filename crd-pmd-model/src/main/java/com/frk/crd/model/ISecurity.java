@@ -1,10 +1,8 @@
 package com.frk.crd.model;
 
-import com.frk.crd.core.JsonAware;
-
 import java.util.Date;
 
-public interface ISecurity extends JsonAware {
+public interface ISecurity {
   String getSecId();
 
   String getAssetCurrencyCode();

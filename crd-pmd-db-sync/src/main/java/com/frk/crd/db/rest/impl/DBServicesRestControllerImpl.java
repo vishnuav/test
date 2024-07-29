@@ -1,7 +1,7 @@
 package com.frk.crd.db.rest.impl;
 
 import com.frk.crd.core.IExceptionMessage;
-import com.frk.crd.db.model.IOrder;
+import com.frk.crd.model.IOrder;
 import com.frk.crd.db.rest.DBServicesRestController;
 import com.frk.crd.db.service.DBReadService;
 import com.frk.crd.db.service.DBSyncService;

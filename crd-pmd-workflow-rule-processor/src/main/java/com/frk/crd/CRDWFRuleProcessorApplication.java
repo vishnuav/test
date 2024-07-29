@@ -1,11 +1,11 @@
-package com.frk.crd.wf;
+package com.frk.crd;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"com.frk.crd.wf"})
+@SpringBootApplication(scanBasePackages = {"com.frk.crd"})
 public class CRDWFRuleProcessorApplication {
   public static void main(String[] args) {
     log.info("Starting CRD PMD WF Rule Processor Application");

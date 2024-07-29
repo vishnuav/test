@@ -1,4 +1,4 @@
-package com.frk.crd.db.model;
+package com.frk.crd.model;
 
 import java.util.Date;
 

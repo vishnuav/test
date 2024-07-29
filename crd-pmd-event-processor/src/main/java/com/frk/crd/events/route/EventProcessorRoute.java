@@ -23,7 +23,7 @@ public class EventProcessorRoute extends RouteBuilder {
   private final ConnectionFactory connectionFactory;
 
   public EventProcessorRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.in.queue}") String pmdOutQueue,
-                             @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.in.queue}") String chubOutQueue,
+                             @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.out.queue}") String chubOutQueue,
                              EventProcessor eventProcessor, JMSComponentBean jmsComponentBean, ConnectionFactory connectionFactory) {
     this.pmdInQueue = pmdInQueue;
     this.pmdOutQueue = pmdOutQueue;
@@ -38,18 +38,18 @@ public class EventProcessorRoute extends RouteBuilder {
   @Override
   public void configure() {
     getContext().setTypeConverterStatisticsEnabled(true);
-//    getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
-//
-//    // CRD to Putnam Route
-//    from(jmsComponentBean.routeInfo() + pmdInQueue)
-//      .bean(eventProcessor, "process")
-//      .to("log:com.frk.crd?level=INFO&groupSize=10")
-//      .log("Found message in queue " + pmdInQueue);
-//
-//    // CRD to Contract Hub Route
-//    from(jmsComponentBean.routeInfo() + pmdInQueue)
-//      .bean(eventProcessor, "process")
-//      .to("log:com.frk.crd?level=INFO&groupSize=10")
-//      .log("Found message in queue " + pmdInQueue);
+    getContext().addComponent(jmsComponentBean.componentInfo(), JmsComponent.jmsComponentAutoAcknowledge(connectionFactory));
+
+    // CRD to Putnam Route
+    from(jmsComponentBean.routeInfo() + pmdInQueue)
+      .bean(eventProcessor, "process")
+      .to("log:com.frk.crd?level=INFO&groupSize=10")
+      .log("Found message in queue " + pmdInQueue);
+
+    // CRD to Contract Hub Route
+    from(jmsComponentBean.routeInfo() + chubInQueue)
+      .bean(eventProcessor, "process")
+      .to("log:com.frk.crd?level=INFO&groupSize=10")
+      .log("Found message in queue " + chubInQueue);
   }
 }

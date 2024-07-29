@@ -1,7 +1,7 @@
 package com.frk.crd.db.rest;
 
 import com.frk.crd.core.IExceptionMessage;
-import com.frk.crd.db.model.IOrder;
+import com.frk.crd.model.IOrder;
 import com.frk.crd.model.IAllocation;
 import com.frk.crd.model.ISecurity;
 import com.frk.crd.utilities.DiscoveryService;
@@ -33,12 +33,12 @@ public interface DBServicesRestController {
   @GetMapping(path = DiscoveryService.GET_ORDER, produces = MediaType.APPLICATION_JSON_VALUE)
   ResponseEntity<IOrder> getOrder(@RequestParam("orderId") String orderId);
 
-  @GetMapping(path = DiscoveryService.GET_ALLOCATIONS, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = DiscoveryService.GET_ALLOCATIONS)
   ResponseEntity<List<IAllocation>> getAllocations(@RequestParam("orderId") String orderId);
 
-  @GetMapping(path = DiscoveryService.GET_SECURITY, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = DiscoveryService.GET_SECURITY)
   ResponseEntity<ISecurity> getSecurity(@RequestParam("secId") String secId);
 
-  @GetMapping(path = DiscoveryService.GET_CHILD_SECURITIES, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = DiscoveryService.GET_CHILD_SECURITIES)
   ResponseEntity<List<String>> getChildSecurities(@RequestParam("secId") String secId);
 }

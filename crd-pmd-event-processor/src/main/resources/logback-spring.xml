@@ -14,20 +14,19 @@
     </filter>
   </appender>
 
-  <!--  <logger level="error" name="jdk"/>-->
+  <logger level="error" name="jdk"/>
   <logger level="error" name="sun"/>
   <logger level="error" name="java"/>
   <logger level="error" name="jdk"/>
   <logger level="error" name="javax"/>
-  <logger level="info" name="org"/>
-  <logger level="info" name="io"/>
-  <!--  <logger level="error" name="com"/>-->
-  <!--  <logger level="error" name="reactor"/>-->
+  <logger level="error" name="org"/>
+  <logger level="error" name="io"/>
+  <logger level="error" name="com"/>
+  <logger level="error" name="reactor"/>
 
-  <logger level="info" name="org.springframework.web.servlet.DispatcherServlet"/>
-
-  <logger level="info" name="org.eclipse"/>
-  <logger level="info" name="org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener"/>
+  <logger level="info" name="org.springframework"/>
+  <logger level="info" name="org.apache.camel"/>
+  <logger level="info" name="org.apache.activemq"/>
 
   <logger level="debug" name="org.springframework.web"/>
   <logger level="trace" name="org.springframework.jms.core"/>

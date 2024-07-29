@@ -1,9 +1,9 @@
 package com.frk.crd.db.model;
 
+import com.frk.crd.model.IOrder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Getter

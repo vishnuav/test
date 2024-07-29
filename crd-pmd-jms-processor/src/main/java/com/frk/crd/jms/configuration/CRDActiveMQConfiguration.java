@@ -1,5 +1,6 @@
 package com.frk.crd.jms.configuration;
 
+import com.frk.crd.jms.model.ActiveMQComponentBean;
 import com.frk.crd.jms.model.ActiveMQProperties;
 import com.frk.crd.jms.model.IBMMQComponentBean;
 import com.frk.crd.jms.model.JMSComponentBean;
@@ -32,7 +33,7 @@ public class CRDActiveMQConfiguration {
 
   @Bean
   public JMSComponentBean jmsComponent() {
-    return new IBMMQComponentBean();
+    return new ActiveMQComponentBean();
   }
 
   @Bean

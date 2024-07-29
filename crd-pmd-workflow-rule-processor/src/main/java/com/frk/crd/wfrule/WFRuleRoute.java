@@ -1,8 +1,8 @@
-package com.frk.crd.wf.wfrule;
+package com.frk.crd.wfrule;
 
+import com.frk.crd.interceptor.EnrichmentInterceptor;
+import com.frk.crd.interceptor.HeaderInterceptor;
 import com.frk.crd.jms.model.JMSComponentBean;
-import com.frk.crd.wf.interceptor.EnrichmentInterceptor;
-import com.frk.crd.wf.interceptor.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -24,8 +24,8 @@ public class WFRuleRoute extends RouteBuilder {
   private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
 
-  public WFRuleRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.in.queue}") String pmdForwardQueue,
-                     @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.in.queue}") String chubForwardQueue,
+  public WFRuleRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.forward.queue}") String pmdForwardQueue,
+                     @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.forward.queue}") String chubForwardQueue,
                      @Value("${crd.app.message.folder}") String messageFolder, JMSComponentBean jmsComponentBean,
                      ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
     this.pmdInQueue = pmdInQueue;

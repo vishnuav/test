@@ -1,6 +1,50 @@
-environment: dev
 server:
   port: 9030
+crd:
+  app:
+    db:
+      service:
+        url: http://localhost:6010
+    pmd:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
+      out:
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.out.queue
+    chub:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
+      out:
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.out.queue
+    full-path: ${user.home}/adapters/${spring.application.name}
+spring:
+  application:
+    name: CRD-PMD-EVENT-PROCESSOR-APP
+logging:
+  file:
+    path: ${crd.app.full-path}/${environment}/logs
+---
+#ActiveMQ Environment
+environment: activemq
+spring:
+  config:
+    activate:
+      on-profile: activemq
+    name: activemq
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    inMemory: true
+    user: admin
+    password: admin
+    packages:
+      trusted: com.broker.activemq.entities,java.lang
+---
+#IBMMQ Environment
+environment: ibmmq
+spring:
+  config:
+    activate:
+      on-profile: ibmmq
+    name: ibmmq
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -8,52 +52,23 @@ ibm:
     host: rcovlnx3203
     port: 1420
     connName: rcovlnx3203(1420)
-crd:
-  app:
-    pmd:
-      in:
-        queue: frd.crd.to.pmd.in.queue
-      forward:
-        queue: frd.crd.to.pmd.forward.queue
-    chub:
-      in:
-        queue: frd.crd.to.chub.in.queue
-      forward:
-        queue: frd.crd.to.chub.forward.queue
-spring:
-  application:
-    name: crd-pmd-event-processor-app
 ---
 #Local Environment
 environment: local
 server:
   port: 6030
-logging:
-  file:
-    path: ${crd.app.full-path}/${environment}/logs
 spring:
   config:
     activate:
-      on-profile: local, default
+      on-profile: local, default, activemq
     name: local
-  activemq:
-    brokerUrl: tcp://localhost:60720
-    inMemory: true
-    closeTimeout: true
-    user: admin
-    password: admin
-    packages:
-      trusted: com.broker.activemq.entities,java.lang
-crd:
-  app:
-    full-path: ${user.home}/adapters/${spring.application.name}
 ---
 #Development Environment
 environment: dev
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: dev, ibmmq
     name: dev
 server:
   port: 7030
@@ -63,7 +78,7 @@ environment: uat
 spring:
   config:
     activate:
-      on-profile: uat
+      on-profile: uat, ibmmq
     name: uat
 server:
   port: 8030
@@ -73,5 +88,5 @@ environment: prod
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: prod, ibmmq
     name: prod

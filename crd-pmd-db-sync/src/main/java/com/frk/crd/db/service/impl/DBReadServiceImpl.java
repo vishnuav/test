@@ -7,7 +7,7 @@ import com.frk.crd.db.dao.DBBroadcastOrderRepository;
 import com.frk.crd.db.dao.DBBroadcastSecurityRepository;
 import com.frk.crd.db.dao.ExceptionMessageRepository;
 import com.frk.crd.db.model.DBExceptionMessage;
-import com.frk.crd.db.model.IOrder;
+import com.frk.crd.model.IOrder;
 import com.frk.crd.db.service.DBReadService;
 import com.frk.crd.model.IAllocation;
 import com.frk.crd.model.ISecurity;

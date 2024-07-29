@@ -14,7 +14,7 @@
     </filter>
   </appender>
 
-  <!--  <logger level="error" name="jdk"/>-->
+  <logger level="error" name="jdk"/>
   <logger level="error" name="sun"/>
   <logger level="error" name="java"/>
   <logger level="error" name="jdk"/>

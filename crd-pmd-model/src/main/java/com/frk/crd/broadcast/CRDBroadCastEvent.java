@@ -21,13 +21,13 @@ public class CRDBroadCastEvent implements XMLParsingEligible {
   private String secId;
 
   @JsonProperty("SECURITY")
-  private BroadcastSecurity security = new BroadcastSecurity();
+  private BroadcastSecurity security;
   @JsonProperty("SWAP_SECURITY_MAIN")
-  private BroadcastSecurity mainSecurity = null;
+  private BroadcastSecurity mainSecurity;
   @JsonProperty("SWAP_SECURITY_LEG1")
-  private BroadcastSecurity securityLeg1 = null;
+  private BroadcastSecurity securityLeg1;
   @JsonProperty("SWAP_SECURITY_LEG2")
-  private BroadcastSecurity securityLeg2 = null;
+  private BroadcastSecurity securityLeg2;
 
   @JsonProperty("ORDER")
   private BroadcastOrder order;

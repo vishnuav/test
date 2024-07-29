@@ -1,6 +1,6 @@
-package com.frk.crd.wf.wfrule;
+package com.frk.crd.wfrule;
 
-import com.frk.crd.wf.configuration.WFRuleProcessorConfiguration;
+import com.frk.crd.configuration.WFRuleProcessorConfiguration;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

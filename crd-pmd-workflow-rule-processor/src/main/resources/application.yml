@@ -1,6 +1,59 @@
-environment: dev
-server:
-  port: 9040
+crd:
+  app:
+    pmd:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+      forward:
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
+    chub:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+      forward:
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
+    full-path: ${user.home}/adapters/${spring.application.name}
+    message:
+      folder: ${crd.app.full-path}/messages/
+camel:
+  component:
+    jms:
+      acknowledgement-mode-name: AUTO_ACKNOWLEDGE
+#Spring Properties
+spring:
+  application:
+    name: CRD-PMD-WF-RULE-PROCESSOR-APP
+  web:
+    locale: en_US
+  main:
+    banner-mode: off
+#Logging Properties
+logging:
+  file:
+    path: ${crd.app.full-path}/logs
+---
+#ActiveMQ Environment
+spring:
+  config:
+    activate:
+      on-profile: activemq
+    name: activemq
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    inMemory: true
+    packages:
+      truested: com.broker.activemq.entities,java.lang
+    pool:
+      enabled: true
+      max-connections: 10
+      max-sessions-per-connection: 10
+    user: admin
+    password: admin
+---
+#IBMMQ Environment
+spring:
+  config:
+    activate:
+      on-profile: ibmmq
+    name: ibmmq
 ibm:
   mq:
     queueManager: MWDEV01A
@@ -8,242 +61,49 @@ ibm:
     host: rcovlnx3203
     port: 1420
     connName: rcovlnx3203(1420)
-crd:
-  app:
-    db:
-      dir: ${user.home}/crd-app/${environment}/db
-    pmd:
-      in:
-        queue: frd.crd.to.pmd.in.queue
-      forward:
-        queue: frd.crd.to.pmd.forward.queue
-    chub:
-      in:
-        queue: frd.crd.to.chub.in.queue
-      forward:
-        queue: frd.crd.to.chub.forward.queue
-    full-path: ${user.home}/adapters/${spring.application.name}
-    message:
-      folder: ${crd.app.full-path}/messages/
-spring:
-  application:
-    name: crd-pmd-wf-rule-processor-app
-  web:
-    locale: en_US
-  main:
-    banner-mode: off
-  jpa:
-    database-platform: org.hibernate.dialect.OracleDialect
-    show-sql: false
-#    database-platform: com.frk.crd.db.dialect.SQLiteDialect
-    hibernate:
-      ddl-auto: none
-    open-in-view: false
-    generate-ddl: false
-    properties:
-      hibernate:
-        jdbc:
-          batch_size: 1000
-        order_inserts: true
-        order_updates: true
-        generate_statistics: true
-  datasource:
-#  datasource:
-    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: vayyala
-    password: Weclome#321
-#    url: jdbc:sqlite:${crd.app.db.dir}/crd.db
-#    driver-class-name: org.sqlite.JDBC
-#    username: sa
-#    password: sa
-    hikari:
-      data-source-properties:
-        cache_size: 4096
-      maximum-pool-size: 64
-#Logging Properties
-logging:
-  file:
-    path: ${crd.app.full-path}/logs
-  level:
-    jdbc:
-      sqlonly: info
-      resultsettable: info
-      sqltiming: info
-      audit: info
-      resultset: info
-      connection: info
 ---
 #Local Environment
 environment: local
-logging:
-  file:
-    path: ${user.home}/crd-app/${environment}/logs
-ibm:
-  mq:
-    initial:
-      context:
-        url: file:${user.home}/jndi-dir
 spring:
   config:
     activate:
-      on-profile: local, default
+      on-profile: local, default, activemq
     name: local
 server:
-  port: 6010
-crd:
-  app:
-    full-path: ${user.home}/adapters/${spring.application.name}
-    db:
-      dir: ${crd.app.full-path}/db
+  port: 6040
 ---
 #Development Environment 2
 environment: dev2
 spring:
   config:
     activate:
-      on-profile: dev2
+      on-profile: dev2, ibmmq
     name: dev2
-  jpa:
-    hibernate:
-      ddl-auto: none
-    database-platform: org.hibernate.dialect.OracleDialect
-  datasource:
-    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: vayyala
-    password: Weclome#321
----
-#Development Environment 2
-environment: local
-spring:
-  config:
-    activate:
-      on-profile: local, default
-    name: local
-  jpa:
-    hibernate:
-      ddl-auto: none
-    database-platform: org.hibernate.dialect.OracleDialect
-  datasource:
-    url: jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=crimsdevdb-scan.corp.frk.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=CRDDEVC2)))
-    driver-class-name: oracle.jdbc.OracleDriver
-    username: vayyala
-    password: Weclome#321
----
-#Local Environment
-environment: local
-server:
-  port: 6040
-logging:
-  file:
-    path: ${crd.app.full-path}/${environment}/logs
-spring:
-  config:
-    activate:
-      on-profile: local, default
-    name: local
-  activemq:
-    brokerUrl: tcp://localhost:61616
-    inMemory: true
-    closeTimeout: true
-    user: admin
-    password: admin
-    packages:
-      trusted: com.broker.activemq.entities,java.lang
-crd:
-  app:
-    pmd:
-      in:
-        queue: frd.crd.to.pmd.in.queue
-      forward:
-        queue: frd.crd.to.pmd.forward.queue
-    chub:
-      in:
-        queue: frd.crd.to.chub.in.queue
-      forward:
-        queue: frd.crd.to.chub.forward.queue
-    full-path: ${user.home}/adapters/${spring.application.name}
----
-#Local/Default Environment
-environment: local
-spring:
-  config:
-    activate:
-      on-profile: local, default
-    name: local, default
-server:
-  port: 7040
-ibm:
-  mq:
-    queueManager: MWDEV01A
-    channel: MWDEV01.A.CLNTCONN
-    host: rcovlnx3203
-    port: 1420
-    connName: rcovlnx3203(1420)
 ---
 #Development Environment
 environment: dev
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: dev, ibmmq
     name: dev
 server:
   port: 7040
-ibm:
-  mq:
-    queueManager: MWDEV01A
-    channel: MWDEV01.A.CLNTCONN
-    host: rcovlnx3203
-    port: 1420
-    connName: rcovlnx3203(1420)
----
-#Development Environment-2
-environment: dev2
-spring:
-  config:
-    activate:
-      on-profile: dev2
-    name: dev2
-server:
-  port: 7040
-ibm:
-  mq:
-    queueManager: MWDEV01A
-    channel: MWDEV01.A.CLNTCONN
-    host: rcovlnx3203
-    port: 1420
-    connName: rcovlnx3203(1420)
 ---
 #UAT Environment
 environment: uat
 spring:
   config:
     activate:
-      on-profile: uat
+      on-profile: uat, ibmmq
     name: uat
 server:
   port: 8040
-ibm:
-  mq:
-    queueManager: MWDEV01A
-    channel: MWDEV01.A.CLNTCONN
-    host: rcovlnx3203
-    port: 1420
-    connName: rcovlnx3203(1420)
 ---
 #Production Environment
 environment: prod
 spring:
   config:
     activate:
-      on-profile: prod
+      on-profile: prod, ibmmq
     name: prod
-ibm:
-  mq:
-    queueManager: MWDEV01A
-    channel: MWDEV01.A.CLNTCONN
-    host: rcovlnx3203
-    port: 1420
-    connName: rcovlnx3203(1420)

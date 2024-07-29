@@ -25,10 +25,10 @@ import static org.springframework.http.HttpHeaders.ACCEPT;
 
 @Slf4j
 @Component
-public class EventProcessorImpl implements EventProcessor {
+public class CHUBEventProcessorImpl implements EventProcessor {
   private final WebClient crdDBWebclient;
 
-  public EventProcessorImpl(WebClient crdDBWebclient) {
+  public CHUBEventProcessorImpl(WebClient crdDBWebclient) {
     this.crdDBWebclient = crdDBWebclient;
   }
 

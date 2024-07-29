@@ -1,4 +1,4 @@
-package com.frk.crd.wf.configuration;
+package com.frk.crd.configuration;
 
 import com.frk.crd.jms.configuration.CRDActiveMQConfiguration;
 import com.frk.crd.jms.configuration.CRDIMBMQConfiguration;

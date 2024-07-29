@@ -1,4 +1,4 @@
-package com.frk.crd.wf.rest;
+package com.frk.crd.events.rest;
 
 import com.frk.crd.utilities.DiscoveryService;
 import lombok.extern.slf4j.Slf4j;
