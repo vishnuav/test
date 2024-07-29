@@ -1,13 +1,14 @@
 package com.frk.crd.db.model;
 
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.Date;
+
 @Getter
 @Setter
-public class DBBroadcastOrder implements Serializable {
+public class DBOrder implements IOrder {
   private String orderId;
   private String instruction;
   private String brokerReason;

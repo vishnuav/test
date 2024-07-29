@@ -1,9 +1,12 @@
 package com.frk.crd.db.rest.impl;
 
+import com.frk.crd.core.IExceptionMessage;
+import com.frk.crd.db.model.IOrder;
 import com.frk.crd.db.rest.DBServicesRestController;
 import com.frk.crd.db.service.DBReadService;
 import com.frk.crd.db.service.DBSyncService;
-import com.frk.crd.core.IExceptionMessage;
+import com.frk.crd.model.IAllocation;
+import com.frk.crd.model.ISecurity;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +42,25 @@ public class DBServicesRestControllerImpl implements DBServicesRestController {
   @Override
   public ResponseEntity<List<IExceptionMessage>> fetchExceptionMessagesForDate(long exceptionDate) {
     return ResponseEntity.ok(dbReadService.fetchExceptionMessagesForDate(exceptionDate));
+  }
+
+  @Override
+  public ResponseEntity<IOrder> getOrder(String orderId) {
+    return ResponseEntity.ok(dbReadService.fetchOrder(orderId));
+  }
+
+  @Override
+  public ResponseEntity<List<IAllocation>> getAllocations(String orderId) {
+    return ResponseEntity.ok(dbReadService.fetchAllocations(orderId));
+  }
+
+  @Override
+  public ResponseEntity<ISecurity> getSecurity(String secId) {
+    return ResponseEntity.ok(dbReadService.fetchSecurity(secId));
+  }
+
+  @Override
+  public ResponseEntity<List<String>> getChildSecurities(String secId) {
+    return ResponseEntity.ok(dbReadService.fetchChildSecurities(secId));
   }
 }

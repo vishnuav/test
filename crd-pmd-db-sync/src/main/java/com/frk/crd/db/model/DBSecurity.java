@@ -1,13 +1,14 @@
 package com.frk.crd.db.model;
 
-import java.io.Serializable;
 import java.util.Date;
+
+import com.frk.crd.model.ISecurity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class DBBroadcastSecurity implements Serializable {
+public class DBSecurity implements ISecurity {
   private String secId;
   private String assetCurrencyCode;
   private String securityName;
@@ -31,7 +32,7 @@ public class DBBroadcastSecurity implements Serializable {
   private String issuerName;
   private String optionExpireType;
   private Date fixingDate;
-  private String otcClearingEligibility;
+  private String otcClearingEligibilityIndicator;
   private Date securityIssueDate;
   private String maturityAdjustment;
   private String issueDateAdjustment;

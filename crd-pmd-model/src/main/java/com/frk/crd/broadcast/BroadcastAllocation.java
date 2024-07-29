@@ -1,157 +1,96 @@
 package com.frk.crd.broadcast;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.frk.crd.core.JsonAware;
 import com.frk.crd.core.XMLParsingEligible;
+import com.frk.crd.model.IAllocation;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class BroadcastAllocation implements JsonAware, XMLParsingEligible {
-  //        <></CRD_TABLE_NAME>
+public class BroadcastAllocation implements IAllocation, XMLParsingEligible {
   @JsonProperty("CRD_TABLE_NAME")
   private String crdTableName = "TS_ORDER_ALLOC";
-
-  //        <></ORIG_ORDER_ID>
   @JsonProperty("ORIG_ORDER_ID")
-  private String orignalOrderName = "5047690053";
-
-  //        <></ORDER_ID>
+  private String orignalOrderName;
   @JsonProperty("ORDER_ID")
-  private String orderId = "5047690053";
-
-  //        <></INSTRUCTION>
+  private String orderId;
   @JsonProperty("INSTRUCTION")
-  private String instructions = "LIM";
-
-  //        <></BROKER_REASON>
+  private String instructions;
   @JsonProperty("BROKER_REASON")
-  private String brokerReason = "P";
-
-  //        <></NET_TRADE_IND>
+  private String brokerReason;
   @JsonProperty("NET_TRADE_IND")
-  private String netTradeIndicator = "A";
-
-  //        <></ORDER_DURATION>
+  private String netTradeIndicator;
   @JsonProperty("ORDER_DURATION")
-  private String orderDuration = "GTC";
-
-  //        <></EXCH_CD>
+  private String orderDuration;
   @JsonProperty("EXCH_CD")
-  private String exchangeCode = "OTC";
-
-  //        <></TRADER>
+  private String exchangeCode;
   @JsonProperty("TRADER")
-  private String trader = "SBIANCHI";
-
-  //        <></MANAGER>
+  private String trader;
   @JsonProperty("MANAGER")
-  private String manager = "SBIANCHI";
-
-  //        <></CREATE_USER>
+  private String manager;
   @JsonProperty("CREATE_USER")
-  private String createUser = "SBIANCHI";
-
-  //        <></LAST_UPD_USER>
+  private String createUser;
   @JsonProperty("LAST_UPD_USER")
-  private String lastUpdateUser = "TISAPI";
-
-  //        <></COMMENTS>
+  private String lastUpdateUser;
   @JsonProperty("COMMENTS")
-  private String comments = "Instructions";
-
-  //        <></TRANS_TYPE>
+  private String comments;
   @JsonProperty("TRANS_TYPE")
-  private String transactionType = "BUYL";
-
-  //        <></INV_CLASS_CD>
+  private String transactionType;
   @JsonProperty("INV_CLASS_CD")
-  private String invoiceClassCode = "OPTN";
-
-  //        <></STATUS>
+  private String invoiceClassCode;
   @JsonProperty("STATUS")
-  private String status = "ACCT";
-
-  //        <></INCLUDE_IN_CASH>
+  private String status;
   @JsonProperty("INCLUDE_IN_CASH")
-  private String includeInCash = "Y";
-
-  //        <></DELIVERY_TYPE>
+  private String includeInCash;
   @JsonProperty("DELIVERY_TYPE")
-  private String deliveryType = "DTC";
-
-  //        <></EXEC_BROKER>
+  private String deliveryType;
   @JsonProperty("EXEC_BROKER")
-  private String executionBrokerCode = "GSCO0";
-
-  //        <></TRADE_DATE>
-//  @JsonProperty("TRADE_DATE")
-//  private LocalDateTime tradeDate = LocalDateTime.of(2024, 6, 28, 1, 1, 1, 0);
-
-  //        <></TO_TRADER_DATE>
-//  @JsonProperty("TO_TRADER_DATE")
-//  private LocalDateTime toTraderDate = LocalDateTime.of(2024, 6, 28, 1, 1, 1, 0);
-
-  //        <></IPO>
+  private String executionBrokerCode;
+  @JsonProperty("TRADE_DATE")
+  private Date tradeDate;
+  @JsonProperty("TO_TRADER_DATE")
+  private Date toTraderDate;
   @JsonProperty("IPO")
-  private String ipo = "N";
-
-  //        <></ORDER_ACCT_CD>
+  private String ipo;
   @JsonProperty("ORDER_ACCT_CD")
-  private String orderAccountCode = "TEST230";
-
-  //        <></PRIN_LOCAL_CRRNCY_SEC_ID>
+  private String orderAccountCode;
   @JsonProperty("PRIN_LOCAL_CRRNCY_SEC_ID")
-  private String principalLocalCurrencySecId = "702089284";
-
-  //        <></TAX_LOT_SELL_CNVTN>
+  private String principalLocalCurrencySecId;
   @JsonProperty("TAX_LOT_SELL_CNVTN")
-  private String taxLotSellConvention = "LIFO";
-
-  //        <></TARGET_QTY>
+  private String taxLotSellConvention;
   @JsonProperty("TARGET_QTY")
-  private double targetQuantity = 1000000;
-
-  //        <></NET_PRIN_AMT>
+  private Double targetQuantity;
   @JsonProperty("NET_PRIN_AMT")
-  private double netPrincipalAmount = 6000000;
-
-  //        <></TARGET_NOTNL_BASE_AMT>
+  private Double netPrincipalAmount;
   @JsonProperty("TARGET_NOTNL_BASE_AMT")
-  private double targetNotionalBaseAmount = 134620000;
-
-  //        <></TARGET_NOTNL_AMT>
+  private Double targetNotionalBaseAmount;
   @JsonProperty("TARGET_NOTNL_AMT")
-  private double targetNotionalAmount = 134620000;
-
-  //        <></EXEC_PRICE>
+  private Double targetNotionalAmount;
   @JsonProperty("EXEC_PRICE")
-  private double executionPx = 6;
-
-  //        <></EXEC_QTY>
+  private Double executionPx;
   @JsonProperty("EXEC_QTY")
-  private double executionQuantity = 1000000;
-
-  //        <></EXEC_AMT>
+  private Double executionQuantity;
   @JsonProperty("EXEC_AMT")
-  private double executionAmount = 6000000;
-
-  //        <></TARGET_AMT>
+  private Double executionAmount;
   @JsonProperty("TARGET_AMT")
-  private double targetAmount = 6000000;
-
-  //        <></COMMISION_IND>
+  private Double targetAmount;
   @JsonProperty("COMMISION_IND")
-  private String commissionIndicator = "CPS";
-
-  //        <></CUR_BASE_MKT_VAL>
+  private String commissionIndicator;
   @JsonProperty("CUR_BASE_MKT_VAL")
-  private double currentBaseMarketValue = 6000000;
-
-  //        <></TRANS_SUB_TYPE>
+  private Double currentBaseMarketValue;
   @JsonProperty("TRANS_SUB_TYPE")
   private String transactionSubType = "OPEN";
+  @JsonProperty("ORIG_ORDER_ID")
+  private String originalOrderId;
+  @JsonProperty("NET_MONEY")
+  private Double netMoney;
+  @JsonProperty("ACCT_CD")
+  private String accountCode;
+  @JsonProperty("COMMISON_AMOUNT")
+  private Double commissionAmount;
 }

@@ -1,8 +1,9 @@
 package com.frk.crd.db.dao;
 
-import com.frk.crd.db.model.DBBroadcastAllocation;
+import com.frk.crd.model.IAllocation;
+
 import java.util.List;
 
 public interface DBBroadcastAllocationRepository {
-  List<DBBroadcastAllocation> getAllocations(String orderId);
+  List<IAllocation> getAllocations(String orderId);
 }

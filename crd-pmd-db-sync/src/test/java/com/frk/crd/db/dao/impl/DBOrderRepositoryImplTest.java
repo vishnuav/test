@@ -2,8 +2,7 @@ package com.frk.crd.db.dao.impl;
 
 import com.frk.crd.db.configuration.CRDDBSyncConfiguration;
 import com.frk.crd.db.dao.DBBroadcastOrderRepository;
-import com.frk.crd.db.model.DBBroadcastOrder;
-import java.util.stream.Stream;
+import com.frk.crd.db.model.DBOrder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "dev2")
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBBroadcastOrderRepositoryImpl.class})
-class DBBroadcastOrderRepositoryImplTest {
+class DBOrderRepositoryImplTest {
   @Autowired
   private DBBroadcastOrderRepository repository;
 
@@ -23,7 +22,7 @@ class DBBroadcastOrderRepositoryImplTest {
   void testOrder() {
     Assertions.assertNotNull(repository);
     String orderId = "5047678919";
-    DBBroadcastOrder order = repository.getOrder(orderId);
+    DBOrder order = repository.getOrder(orderId);
     Assertions.assertNotNull(order);
     Assertions.assertEquals(orderId, order.getOrderId());
     Assertions.assertEquals("MKT", order.getInstruction());
@@ -71,7 +70,7 @@ class DBBroadcastOrderRepositoryImplTest {
 
   @Test
   void bulkOrders() {
-    DBBroadcastOrder order = repository.getOrder("5047678919");
+    DBOrder order = repository.getOrder("5047678919");
     Assertions.assertNotNull(order);
   }
 }

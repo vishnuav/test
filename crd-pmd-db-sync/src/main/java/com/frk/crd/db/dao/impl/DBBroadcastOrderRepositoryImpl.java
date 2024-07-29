@@ -1,7 +1,7 @@
 package com.frk.crd.db.dao.impl;
 
 import com.frk.crd.db.dao.DBBroadcastOrderRepository;
-import com.frk.crd.db.model.DBBroadcastOrder;
+import com.frk.crd.db.model.DBOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -86,8 +86,8 @@ public class DBBroadcastOrderRepositoryImpl implements DBBroadcastOrderRepositor
   }
 
   @Override
-  public DBBroadcastOrder getOrder(String orderId) {
-    final DBBroadcastOrder order = new DBBroadcastOrder();
+  public DBOrder getOrder(String orderId) {
+    final DBOrder order = new DBOrder();
     jdbcTemplate.query(this.ORDER_SQL, preparedStatementSetter -> {
           preparedStatementSetter.setString(1, orderId);
         },

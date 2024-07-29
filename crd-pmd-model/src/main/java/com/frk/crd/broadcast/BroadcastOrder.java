@@ -6,128 +6,100 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class BroadcastOrder implements BroadcastOrderAware {
-  //        <></CRD_TABLE_NAME>
   @JsonProperty("CRD_TABLE_NAME")
-  private String crdTableName = "TS_ORDER";
+  private String crdTableName;
 
-  //        <></ORDER_ID>
   @JsonProperty("ORDER_ID")
-  private String orderId = "5047705350";
+  private String orderId;
 
-  //        <></SEC_ID>
   @JsonProperty("SEC_ID")
-  private String secId = "5047703478";
+  private String secId;
 
-  //        <></INSTRUCTION>
   @JsonProperty("INSTRUCTION")
-  private String instruction = "LIM";
+  private String instruction;
 
-  //        <></BROKER_REASON>
   @JsonProperty("BROKER_REASON")
-  private String brokerReason = "P";
+  private String brokerReason;
 
-  //        <></NET_TRADE_IND>
   @JsonProperty("NET_TRADE_IND")
-  private String netTradeIndicator = "A";
+  private String netTradeIndicator;
 
-  //        <></EXCH_CD>
   @JsonProperty("EXCH_CD")
-  private String exchangeCode = "OTC";
+  private String exchangeCode;
 
-  //        <></TRADER>
   @JsonProperty("TRADER")
-  private String trader = "SBIANCHI";
+  private String trader;
 
-  //        <></MANAGER>
   @JsonProperty("MANAGER")
-  private String manager = "SBIANCHI";
+  private String manager;
 
-  //        <></CREATE_USER>
   @JsonProperty("CREATE_USER")
-  private String createUser = "SBIANCHI";
+  private String createUser;
 
-  //        <></LAST_UPD_USER>
   @JsonProperty("LAST_UPD_USER")
-  private String lastUpdateUser = "TISAPI";
+  private String lastUpdateUser;
 
-  //        <></COMMENTS>
   @JsonProperty("COMMENTS")
-  private String comments = "OTC Eq Index Call Option Order";
+  private String comments;
 
-  //        <></TRANS_TYPE>
   @JsonProperty("TRANS_TYPE")
-  private String transactionType = "BUYL";
+  private String transactionType;
 
-  //        <></INV_CLASS_CD>
   @JsonProperty("INV_CLASS_CD")
-  private String invoiceClassCode = "OPTN";
+  private String invoiceClassCode;
 
-  //        <></STATUS>
   @JsonProperty("STATUS")
-  private String status = "ACCT";
+  private String status;
 
-  //        <></DELIVERY_TYPE>
   @JsonProperty("DELIVERY_TYPE")
-  private String deliverType = "DTC";
+  private String deliverType;
 
-  //        <></EXEC_BROKER>
   @JsonProperty("EXEC_BROKER")
-  private String executionBroker = "GSCO0";
+  private String executionBroker;
 
-  //        <></TRADE_DATE>
-//  @JsonProperty("TRADE_DATE")
-//  private LocalDateTime tradeDate = LocalDateTime.of(2024, 06, 28, 0, 0, 0, 0);
+  @JsonProperty("TRADE_DATE")
+  private Date tradeDate;
 
-  //        <></ORDER_ACCT_CD>
   @JsonProperty("ORDER_ACCT_CD")
-  private String orderAccountCode = "Test55";
+  private String orderAccountCode;
 
-  //        <></TARGET_QTY>
   @JsonProperty("TARGET_QTY")
-  private double targetQuantity = 1000000;
+  private double targetQuantity;
 
-  //        <></TARGET_AMT>
   @JsonProperty("TARGET_AMT")
   private double targetAmount;
 
-  //        <></PRIN_LOCAL_CRRNCY_SEC_ID>
   @JsonProperty("PRIN_LOCAL_CRRNCY_SEC_ID")
-  private String principalLocalCurrencySecId = "702089284";
+  private String principalLocalCurrencySecId;
 
-  //        <></CNTRCT_SIZE>
   @JsonProperty("CNTRCT_SIZE")
-  private double contractSize = 100;
+  private double contractSize;
 
-  //        <></PRIN_LOCAL_CRRNCY>
   @JsonProperty("PRIN_LOCAL_CRRNCY")
-  private String principalLocalCurrency = "USD";
+  private String principalLocalCurrency;
 
-  //        <></REFERENCE_PRICE>
   @JsonProperty("REFERENCE_PRICE")
-  private double referencePx = 4.5;
+  private double referencePx;
 
-  //        <></SETTLE_DATE>
-//  @JsonProperty("SETTLE_DATE")
-//  private LocalDateTime settleDate = LocalDateTime.of(2024, 7, 1, 0, 0, 0, 0);
+  @JsonProperty("SETTLE_DATE")
+  private Date settleDate;
 
-  //        <></PRIN_SETTLE_FX_RATE>
   @JsonProperty("PRIN_SETTLE_FX_RATE")
-  private double principleSettleFxRate = 1;
+  private double principleSettleFxRate;
 
-  //        <></PRIN_SETTLE_CRRNCY>
   @JsonProperty("PRIN_SETTLE_CRRNCY")
-  private String principleSettleCurrency = "USD";
+  private String principleSettleCurrency;
 
-  //        <></BKR_NAME>
   @JsonProperty("BKR_NAME")
-  private String brokerName = "BANK OF AMERICA NA OTC";
+  private String brokerName;
 
-  //        <></COUNTERPARTY>
   @JsonProperty("COUNTERPARTY")
-  private String counterparty = "BOFA0";
+  private String counterparty;
 }

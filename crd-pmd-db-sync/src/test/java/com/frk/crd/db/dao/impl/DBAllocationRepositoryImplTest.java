@@ -2,8 +2,7 @@ package com.frk.crd.db.dao.impl;
 
 import com.frk.crd.db.configuration.CRDDBSyncConfiguration;
 import com.frk.crd.db.dao.DBBroadcastAllocationRepository;
-import com.frk.crd.db.model.DBBroadcastAllocation;
-import java.util.List;
+import com.frk.crd.model.IAllocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,10 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "dev2")
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBBroadcastAllocationRepositoryImpl.class})
-class DBBroadcastAllocationRepositoryImplTest {
+class DBAllocationRepositoryImplTest {
   @Autowired
   private DBBroadcastAllocationRepository repository;
 
@@ -23,11 +24,11 @@ class DBBroadcastAllocationRepositoryImplTest {
   void testAllocations() {
     Assertions.assertNotNull(repository);
     String orderId = "5047391070";
-    List<DBBroadcastAllocation> allocations = repository.getAllocations(orderId);
+    List<IAllocation> allocations = repository.getAllocations(orderId);
     Assertions.assertNotNull(allocations);
     Assertions.assertEquals(2, allocations.size());
 
-    DBBroadcastAllocation allocation = allocations.get(0);
+    IAllocation allocation = allocations.get(0);
     Assertions.assertNotNull(allocation);
     String cps = "CPS";
     Assertions.assertEquals("5047391070", allocation.getOrderId());

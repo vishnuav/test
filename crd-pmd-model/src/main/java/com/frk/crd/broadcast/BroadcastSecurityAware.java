@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.frk.crd.core.XMLParsingEligible;
-import java.util.Date;
+import com.frk.crd.model.ISecurity;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
 
 
 @JsonRootName("SECURITY")
-public interface BroadcastSecurityAware extends XMLParsingEligible {
+public interface BroadcastSecurityAware extends ISecurity, XMLParsingEligible {
   String SWAPTION_IRS = "SWPTNIRS";
   String SWAPTION_CREDIT = "SWPTNCDI";
 
@@ -33,7 +35,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getCusip();
 
   @JsonProperty("EXERCISE_SETTLE_LAG")
-  String getExerciseSettleFlag();
+  String getExerciseSettleLag();
 
   @JsonProperty("EXPIRE_DATE")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddThh:mm:ss")
@@ -73,7 +75,7 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   String getMaturityDateAdjustment();
 
   @JsonProperty("MKT_PRICE")
-  double getMarketPx();
+  Double getMarketPx();
 
   @JsonProperty("OPTN_EXPIRE_TYPE")
   String getOptionExpireType();
@@ -91,13 +93,13 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
   Date getSecurityIssueDate();
 
   @JsonProperty("SEC_NAME")
-  String getSecName();
+  String getSecurityName();
 
   @JsonProperty("SEC_TYP_CD")
-  String getSecTypeCode();
+  String getSecurityTypeCode();
 
   @JsonProperty("STRIKE_PRICE")
-  double getStrikePx();
+  Double getStrikePx();
 
   @JsonProperty("SWAPTION_TERM")
   String getSwaptionTerm();
@@ -113,6 +115,6 @@ public interface BroadcastSecurityAware extends XMLParsingEligible {
 
   @JsonIgnore
   default boolean isSwaption() {
-    return StringUtils.equals(getSecTypeCode(), SWAPTION_IRS) || StringUtils.equals(getSecTypeCode(), SWAPTION_CREDIT);
+    return StringUtils.equals(getSecurityTypeCode(), SWAPTION_IRS) || StringUtils.equals(getSecurityTypeCode(), SWAPTION_CREDIT);
   }
 }

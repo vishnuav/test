@@ -1,6 +1,8 @@
 package com.frk.crd.jms.configuration;
 
+import com.frk.crd.jms.model.IBMMQComponentBean;
 import com.frk.crd.jms.model.IBMMQProperties;
+import com.frk.crd.jms.model.JMSComponentBean;
 import com.ibm.mq.jms.MQQueueConnectionFactory;
 import com.ibm.msg.client.wmq.WMQConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -22,8 +24,13 @@ import javax.jms.JMSException;
 public class CRDIMBMQConfiguration {
   @Bean
   @ConfigurationProperties(value = "ibm.mq")
-  public IBMMQProperties jmsProperties() {
+  public IBMMQProperties ibmmqProperties() {
     return new IBMMQProperties();
+  }
+
+  @Bean
+  public JMSComponentBean jmsComponent() {
+    return new IBMMQComponentBean();
   }
 
   @Bean

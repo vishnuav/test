@@ -2,7 +2,7 @@ package com.frk.crd.db.dao.impl;
 
 import com.frk.crd.db.configuration.CRDDBSyncConfiguration;
 import com.frk.crd.db.dao.DBBroadcastSecurityRepository;
-import com.frk.crd.db.model.DBBroadcastSecurity;
+import com.frk.crd.db.model.DBSecurity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,18 +11,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles(value = "dev2")
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBBroadcastSecurityRepositoryImpl.class})
-class DBBroadcastSecurityRepositoryImplTest {
+class DBSecurityRepositoryImplTest {
   @Autowired
   private DBBroadcastSecurityRepository repository;
 
   @Test
-  void testSecurity() {
+  void getSecurity() {
     Assertions.assertNotNull(repository);
     String secId = "5051098226";
-    DBBroadcastSecurity security = repository.getSecurity(secId);
+    DBSecurity security = repository.getSecurity(secId);
     Assertions.assertNotNull(security);
     Assertions.assertEquals(secId, security.getSecId());
 
@@ -51,7 +53,7 @@ class DBBroadcastSecurityRepositoryImplTest {
     Assertions.assertEquals("Bank of America N.A.", security.getIssuerName());
     Assertions.assertEquals("EURO", security.getOptionExpireType());
     Assertions.assertNull(security.getFixingDate());
-    Assertions.assertEquals("N", security.getOtcClearingEligibility());
+    Assertions.assertEquals("N", security.getOtcClearingEligibilityIndicator());
     Assertions.assertEquals("2024-07-10", security.getSecurityIssueDate().toString());
     Assertions.assertNull(security.getMaturityAdjustment());
     Assertions.assertNull(security.getIssueDateAdjustment());
@@ -61,5 +63,16 @@ class DBBroadcastSecurityRepositoryImplTest {
     Assertions.assertNull(security.getBusinessDayConversion());
     Assertions.assertEquals("5051098227", security.getUnderlyingSecId());
     Assertions.assertEquals("5051098227", security.getSwapSecId());
+  }
+
+  @Test
+  void getChildSecurities() {
+    Assertions.assertNotNull(repository);
+    String secId = "5051098226";
+    List<String> childSecurities = repository.getChildSecurities(secId);
+    Assertions.assertNotNull(childSecurities);
+    Assertions.assertEquals(2, childSecurities.size());
+    Assertions.assertTrue(childSecurities.contains(""));
+    Assertions.assertTrue(childSecurities.contains(""));
   }
 }

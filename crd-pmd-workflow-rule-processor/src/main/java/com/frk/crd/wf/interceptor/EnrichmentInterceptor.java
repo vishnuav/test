@@ -1,4 +1,4 @@
-package com.frk.wf.interceptor;
+package com.frk.crd.wf.interceptor;
 
 import com.frk.crd.converter.CustomJsonMessageConverter;
 import com.frk.crd.model.Allocation;
@@ -25,7 +25,6 @@ public class EnrichmentInterceptor {
       order.setOriginalId(getOriginalOrderId(refId));
       order.addAllocations(getAllocations(refId));
       exchange.getOut().setBody(event.toXML());
-      System.out.println();
     } else {
       log.error("Unable to map payload to event or input event is not present {}", payload);
     }

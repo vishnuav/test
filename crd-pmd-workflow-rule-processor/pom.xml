@@ -14,19 +14,11 @@
   <dependencies>
     <dependency>
       <groupId>com.frk.crd</groupId>
-      <artifactId>crd-pmd-db-sync</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-utilities</artifactId>
     </dependency>
     <dependency>
       <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-model</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.frk.crd</groupId>
-      <artifactId>crd-pmd-event-processor</artifactId>
     </dependency>
     <dependency>
       <groupId>com.frk.crd</groupId>
@@ -128,7 +120,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.frk.wf.CRDWFRuleProcessorApplication</mainClass>
+              <mainClass>com.frk.crd.wf.CRDWFRuleProcessorApplication</mainClass>
             </manifest>
             <manifestEntries>
               <Class-Path>../config/</Class-Path>
@@ -163,7 +155,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>com.frk.wf.CRDWFRuleProcessorApplication</mainClass>
+              <mainClass>com.frk.crd.wf.CRDWFRuleProcessorApplication</mainClass>
             </manifest>
           </archive>
           <finalName>${project.artifactId}-${environment}</finalName>

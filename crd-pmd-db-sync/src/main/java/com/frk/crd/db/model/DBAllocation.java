@@ -1,13 +1,13 @@
 package com.frk.crd.db.model;
 
-import java.io.Serializable;
+import com.frk.crd.model.IAllocation;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class DBBroadcastAllocation implements Serializable {
-  private String origOrderId;
+public class DBAllocation implements IAllocation {
+  private String originalOrderId;
   private String orderId;
   private Double targetQuantity;
   private Double targetNotionalAmount;

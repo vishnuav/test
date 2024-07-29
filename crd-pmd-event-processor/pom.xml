@@ -13,10 +13,6 @@
   <dependencies>
     <dependency>
       <groupId>com.frk.crd</groupId>
-      <artifactId>crd-pmd-db-sync</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.frk.crd</groupId>
       <artifactId>crd-pmd-model</artifactId>
     </dependency>
     <dependency>

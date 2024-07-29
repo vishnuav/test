@@ -1,9 +1,8 @@
-package com.frk.wf.wfrule;
+package com.frk.crd.wf.wfrule;
 
-import com.frk.crd.events.processor.EventProcessor;
-import com.frk.wf.interceptor.EnrichmentInterceptor;
-import com.frk.wf.interceptor.HeaderInterceptor;
 import com.frk.crd.jms.model.JMSComponentBean;
+import com.frk.crd.wf.interceptor.EnrichmentInterceptor;
+import com.frk.crd.wf.interceptor.HeaderInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jms.JmsComponent;
@@ -24,13 +23,11 @@ public class WFRuleRoute extends RouteBuilder {
   private final ConnectionFactory connectionFactory;
   private final EnrichmentInterceptor enrichmentInterceptor;
   private final HeaderInterceptor headerInterceptor;
-  private final EventProcessor eventProcessor;
 
   public WFRuleRoute(@Value("${crd.app.pmd.in.queue}") String pmdInQueue, @Value("${crd.app.pmd.in.queue}") String pmdForwardQueue,
                      @Value("${crd.app.chub.in.queue}") String chubInQueue, @Value("${crd.app.chub.in.queue}") String chubForwardQueue,
                      @Value("${crd.app.message.folder}") String messageFolder, JMSComponentBean jmsComponentBean,
-                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor,
-                     EventProcessor eventProcessor) {
+                     ConnectionFactory connectionFactory, HeaderInterceptor headerInterceptor, EnrichmentInterceptor enrichmentInterceptor) {
     this.pmdInQueue = pmdInQueue;
     this.pmdForwardQueue = pmdForwardQueue;
     this.chubInQueue = chubInQueue;
@@ -40,7 +37,6 @@ public class WFRuleRoute extends RouteBuilder {
     this.connectionFactory = connectionFactory;
     this.enrichmentInterceptor = enrichmentInterceptor;
     this.headerInterceptor = headerInterceptor;
-    this.eventProcessor = eventProcessor;
   }
 
   @Override
@@ -58,7 +54,6 @@ public class WFRuleRoute extends RouteBuilder {
     // CRD to Contract Hub WF Rule Processor
     from(jmsComponentBean.routeInfo() + chubInQueue)
       .log("Found message in queue " + chubInQueue)
-      .bean(eventProcessor, "process")
       .to(jmsComponentBean.routeInfo() + chubForwardQueue)
       .to("log:com.frk.crd?level=INFO&groupSize=10")
       .to("file://" + messageFolder);

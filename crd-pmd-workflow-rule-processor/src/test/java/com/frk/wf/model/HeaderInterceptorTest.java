@@ -3,7 +3,7 @@ package com.frk.wf.model;
 import com.frk.crd.converter.CustomJsonMessageConverter;
 import com.frk.crd.jms.configuration.CRDActiveMQConfiguration;
 import com.frk.crd.jms.configuration.CRDJMSConfiguration;
-import com.frk.wf.interceptor.HeaderInterceptor;
+import com.frk.crd.wf.interceptor.HeaderInterceptor;
 import com.frk.crd.model.CRDEvent;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
