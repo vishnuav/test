@@ -75,3 +75,6 @@ spring:
     name: dev2
 server:
   port: 7010
+crd:
+  app:
+    full-path: ${user.home}/adapters
