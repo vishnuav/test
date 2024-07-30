@@ -7,21 +7,23 @@ crd:
         url: http://localhost:6010
     pmd:
       in:
-        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
       out:
-        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.out.queue
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
     chub:
       in:
-        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
       out:
-        queue: QLD.CRI.TIS.ORD.REQUEST.chub.out.queue
-    full-path: ${user.home}/adapters/${spring.application.name}
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+    full-path: /apps/crd.dev2/adapters/crd-pmd-event-processor-local
+    message:
+      folder: ${crd.app.full-path}/messages
 spring:
   application:
     name: CRD-PMD-EVENT-PROCESSOR-APP
 logging:
   file:
-    path: ${crd.app.full-path}/${environment}/logs
+    path: ${crd.app.full-path}/logs
 ---
 #ActiveMQ Environment
 environment: activemq
@@ -62,6 +64,12 @@ spring:
     activate:
       on-profile: local, default
     name: local
+crd:
+  app:
+    db:
+      service:
+        url: http://localhost:6010
+    full-path: /apps/crd.dev2/adapters/crd-pmd-event-processor-local
 ---
 #Development Environment
 environment: dev
@@ -72,6 +80,24 @@ spring:
     name: dev
 server:
   port: 7030
+---
+#Development Environment
+environment: dev2
+spring:
+  config:
+    activate:
+      on-profile: dev2
+    name: dev2
+server:
+  port: 7030
+crd:
+  app:
+    db:
+      service:
+        url: http://localhost:7010
+    full-path: /apps/crd.dev2/adapters/crd-pmd-workflow-rule-processor-local
+    message:
+      folder: ${crd.app.full-path}/messages
 ---
 #UAT Environment
 environment: uat
