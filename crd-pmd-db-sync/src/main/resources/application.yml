@@ -61,15 +61,17 @@ environment: local
 spring:
   config:
     activate:
-      on-profile: local, default, h2
+      on-profile: local, default
     name: local
+server:
+  port: 6010
 ---
 #Development Environment 2
 environment: dev2
 spring:
   config:
     activate:
-      on-profile: dev2, oracle
+      on-profile: dev2
     name: dev2
 server:
   port: 7010

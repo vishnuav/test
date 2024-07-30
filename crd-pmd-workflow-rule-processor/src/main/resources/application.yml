@@ -67,7 +67,7 @@ environment: local
 spring:
   config:
     activate:
-      on-profile: local, default, activemq
+      on-profile: local, default
     name: local
 server:
   port: 6040
@@ -77,7 +77,7 @@ environment: dev2
 spring:
   config:
     activate:
-      on-profile: dev2, ibmmq
+      on-profile: dev2
     name: dev2
 ---
 #Development Environment
@@ -85,7 +85,7 @@ environment: dev
 spring:
   config:
     activate:
-      on-profile: dev, ibmmq
+      on-profile: dev
     name: dev
 server:
   port: 7040
@@ -95,7 +95,7 @@ environment: uat
 spring:
   config:
     activate:
-      on-profile: uat, ibmmq
+      on-profile: uat
     name: uat
 server:
   port: 8040
@@ -105,5 +105,5 @@ environment: prod
 spring:
   config:
     activate:
-      on-profile: prod, ibmmq
+      on-profile: prod
     name: prod
