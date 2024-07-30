@@ -1,6 +1,8 @@
 package com.frk.crd.model;
 
-public interface IAllocation {
+import com.frk.crd.core.JsonAware;
+
+public interface IAllocation extends JsonAware {
   String getOriginalOrderId();
 
   String getOrderId();

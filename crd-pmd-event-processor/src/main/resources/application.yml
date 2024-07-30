@@ -7,14 +7,14 @@ crd:
         url: http://localhost:6010
     pmd:
       in:
-        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
       out:
-        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+        queue: QLD.CRI.TIS.ORD.REQUEST.pmd.forward.queue
     chub:
       in:
-        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
       out:
-        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+        queue: QLD.CRI.TIS.ORD.REQUEST.chub.forward.queue
     full-path: /apps/crd.dev2/adapters/crd-pmd-event-processor-local
     message:
       folder: ${crd.app.full-path}/messages
@@ -95,7 +95,17 @@ crd:
     db:
       service:
         url: http://localhost:7010
-    full-path: /apps/crd.dev2/adapters/crd-pmd-workflow-rule-processor-local
+    pmd:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+      out:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q12
+    chub:
+      in:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+      out:
+        queue: QLD.CRI.TIS.ORD.REQUEST.Q13
+    full-path: /apps/crd.dev2/adapters/crd-pmd-event-processor-local
     message:
       folder: ${crd.app.full-path}/messages
 ---

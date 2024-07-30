@@ -152,6 +152,7 @@
             <descriptorRef>crd-pmd-assembly</descriptorRef>
           </descriptorRefs>
           <appendAssemblyId>false</appendAssemblyId>
+          <finalName>${project.artifactId}-${environment}</finalName>
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>

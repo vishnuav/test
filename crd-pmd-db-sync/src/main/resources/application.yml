@@ -6,7 +6,7 @@ spring:
     name: CRD-DB-SYNC
 logging:
   file:
-    path: ${crd.app.full-path}/logs/${environment}
+    path: ${crd.app.full-path}/logs
 server:
   port: 6010
 ---
@@ -56,7 +56,6 @@ spring:
     password: Weclome#321
 ---
 #Local Default Environment
-#Local Environment
 environment: local
 spring:
   config:
@@ -77,4 +76,4 @@ server:
   port: 7010
 crd:
   app:
-    full-path: ${user.home}/adapters
+    full-path: /apps/crd.dev2/adapters/crd-pmd-db-sync-local

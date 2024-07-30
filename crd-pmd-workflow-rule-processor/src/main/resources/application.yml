@@ -79,6 +79,11 @@ spring:
     activate:
       on-profile: dev2
     name: dev2
+server:
+  port: 7040
+crd:
+  app:
+    full-path: /apps/crd.dev2/adapters/crd-pmd-workflow-rule-processor-local
 ---
 #Development Environment
 environment: dev
