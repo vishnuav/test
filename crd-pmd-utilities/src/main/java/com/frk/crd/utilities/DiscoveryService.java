@@ -9,6 +9,7 @@ public class DiscoveryService {
   public static final String GET_ORDER = "/getOrder";
   public static final String GET_ALLOCATIONS = "/getAllocations";
   public static final String GET_SECURITY = "/getSecurity";
+  public static final String GET_SECURITY_FOR_ORDER_ID = "/getSecurityForOrderId";
   public static final String GET_CHILD_SECURITIES = "/getChildSecurities";
   public static final String DB_SERVICE_CLIENT = "db-service-client";
   public static final String REPLAY_EXCEPTION_MESSAGE = "replayExceptionMessage";

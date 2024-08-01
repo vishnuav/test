@@ -45,8 +45,8 @@ public class DBReadServiceImpl implements DBReadService {
   }
 
   @Override
-  public ISecurity fetchSecurity(String secId) {
-    return securityRepository.getSecurity(secId);
+  public ISecurity fetchSecurityForOrderId(String orderId) {
+    return securityRepository.getSecurityForOrderId(orderId);
   }
 
   @Override

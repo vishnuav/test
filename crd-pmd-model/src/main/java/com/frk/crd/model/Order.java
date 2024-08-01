@@ -19,6 +19,7 @@ public class Order implements XMLParsingEligible {
   private long originalId;
   private String refId;
   private String status;
+  private String secId;
   private int targetQty;
 
   @JsonDeserialize(using = StringNullBlankAwareDeserializer.class)

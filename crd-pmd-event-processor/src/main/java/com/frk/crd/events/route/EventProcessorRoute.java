@@ -1,6 +1,8 @@
 package com.frk.crd.events.route;
 
 import com.frk.crd.events.processor.EventProcessor;
+import com.frk.crd.events.processor.impl.CHUBEventProcessorImpl;
+import com.frk.crd.events.processor.impl.PMDEventProcessorImpl;
 import com.frk.crd.jms.model.JMSComponentBean;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.builder.RouteBuilder;
@@ -18,7 +20,8 @@ public class EventProcessorRoute extends RouteBuilder {
   private final String chubInQueue;
   private final String chubOutQueue;
   private final String messageFolder;
-  private final EventProcessor eventProcessor;
+  private final PMDEventProcessorImpl pmdEventProcessor;
+  private final CHUBEventProcessorImpl chubEventProcessor;
 
   private final JMSComponentBean jmsComponentBean;
   private final ConnectionFactory connectionFactory;
@@ -29,14 +32,17 @@ public class EventProcessorRoute extends RouteBuilder {
       @Value("${crd.app.chub.in.queue}") String chubInQueue,
       @Value("${crd.app.chub.out.queue}") String chubOutQueue,
       @Value("${crd.app.message.folder}") String messageFolder,
-  EventProcessor eventProcessor, JMSComponentBean jmsComponentBean,
+      PMDEventProcessorImpl pmdEventProcessor,
+      CHUBEventProcessorImpl chubEventProcessor,
+      JMSComponentBean jmsComponentBean,
       ConnectionFactory connectionFactory) {
     this.pmdInQueue = pmdInQueue;
     this.pmdOutQueue = pmdOutQueue;
     this.chubInQueue = chubInQueue;
     this.chubOutQueue = chubOutQueue;
     this.messageFolder = messageFolder;
-    this.eventProcessor = eventProcessor;
+    this.pmdEventProcessor = pmdEventProcessor;
+    this.chubEventProcessor = chubEventProcessor;
     this.jmsComponentBean = jmsComponentBean;
     this.connectionFactory = connectionFactory;
     log.info("Activating {} {}", jmsComponentBean.getClass().getSimpleName(), jmsComponentBean.componentInfo());
@@ -49,16 +55,16 @@ public class EventProcessorRoute extends RouteBuilder {
 
     // CRD to Putnam Route
     from(jmsComponentBean.routeInfo() + pmdInQueue)
-        .bean(eventProcessor, "process")
+        .bean(pmdEventProcessor, "process")
         .to("log:com.frk.crd?level=INFO&groupSize=10")
         .log("Found message in queue " + pmdInQueue)
         .to("file://" + messageFolder + "/pmd");
 
     // CRD to Contract Hub Route
     from(jmsComponentBean.routeInfo() + chubInQueue)
-        .bean(eventProcessor, "process")
+        .bean(chubEventProcessor, "process")
         .to("log:com.frk.crd?level=INFO&groupSize=10")
         .log("Found message in queue " + chubInQueue)
-        .to("file://" + messageFolder+ "/chub");
+        .to("file://" + messageFolder + "/chub");
   }
 }

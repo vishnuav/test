@@ -12,7 +12,7 @@ public interface DBReadService {
 
   List<IExceptionMessage> fetchAllExceptionMessages();
 
-  ISecurity fetchSecurity(String secId);
+  ISecurity fetchSecurityForOrderId(String orderID);
 
   IOrder fetchOrder(String orderId);
 

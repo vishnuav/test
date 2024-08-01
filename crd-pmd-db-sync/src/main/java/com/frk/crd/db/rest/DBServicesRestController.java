@@ -36,8 +36,8 @@ public interface DBServicesRestController {
   @GetMapping(path = DiscoveryService.GET_ALLOCATIONS)
   ResponseEntity<List<IAllocation>> getAllocations(@RequestParam("orderId") String orderId);
 
-  @GetMapping(path = DiscoveryService.GET_SECURITY)
-  ResponseEntity<ISecurity> getSecurity(@RequestParam("secId") String secId);
+  @GetMapping(path = DiscoveryService.GET_SECURITY_FOR_ORDER_ID)
+  ResponseEntity<ISecurity> getSecurityForOrderId(@RequestParam("orderId") String secId);
 
   @GetMapping(path = DiscoveryService.GET_CHILD_SECURITIES)
   ResponseEntity<List<String>> getChildSecurities(@RequestParam("secId") String secId);

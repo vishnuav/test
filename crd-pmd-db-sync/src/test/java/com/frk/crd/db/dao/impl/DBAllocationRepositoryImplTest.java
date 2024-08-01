@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles(value = "dev2")
+@ActiveProfiles(value = "oracle")
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBBroadcastAllocationRepositoryImpl.class})
 class DBAllocationRepositoryImplTest {
   @Autowired

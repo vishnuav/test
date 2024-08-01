@@ -55,8 +55,8 @@ public class DBServicesRestControllerImpl implements DBServicesRestController {
   }
 
   @Override
-  public ResponseEntity<ISecurity> getSecurity(String secId) {
-    return ResponseEntity.ok(dbReadService.fetchSecurity(secId));
+  public ResponseEntity<ISecurity> getSecurityForOrderId(String secId) {
+    return ResponseEntity.ok(dbReadService.fetchSecurityForOrderId(secId));
   }
 
   @Override

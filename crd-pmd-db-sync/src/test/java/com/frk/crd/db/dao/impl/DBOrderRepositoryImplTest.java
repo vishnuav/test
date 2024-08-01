@@ -12,7 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles(value = "dev2")
+@ActiveProfiles(value = "oracle")
 @SpringBootTest(classes = {CRDDBSyncConfiguration.class, DBBroadcastOrderRepositoryImpl.class})
 class DBOrderRepositoryImplTest {
   @Autowired

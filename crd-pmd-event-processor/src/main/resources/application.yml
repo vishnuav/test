@@ -69,7 +69,7 @@ crd:
     db:
       service:
         url: http://localhost:6010
-    full-path: /apps/crd.dev2/adapters/crd-pmd-event-processor-local
+    full-path: ${user.home}/${spring.application.name}
 ---
 #Development Environment
 environment: dev
